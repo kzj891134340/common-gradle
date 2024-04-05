@@ -1,6 +1,6 @@
 ext.lib=[
-    entity:["com.whalespay:entity:1.2.88"],
+    entity:["com.whalespay:entity:1.2.89"],
     repository:["com.whalespay:repository:1.0.19"],
     commons:["com.whalespay:commons:1.0.57"],
-    api:["com.whalespay:api:1.0.58"]
+    api:["com.whalespay:api:1.0.59"]
 ]
