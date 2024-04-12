@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    citon:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      proxyBaseApi: https://api.sandbox.citconpay.com/v1/
+      merNo: wppay
+      key: SV1IVFXQIO3OGAGPKFNJUP9J9CPFT8I4
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRua7bMBBFf8WYWoupzdK0AdIlSOHnIksxIocWE4okJCKBYOjfA8rIS5Gl5D2DOeTlAyiYGy+r8Q4QvgvIQFEkwESCNZKi8a7YaLaAIE30Dj+70ynQ9t5Ho7eXxeJpijFgWVIwxY+JLK+BtsJxTEn5TD7QVjoPewbfjFOA8MY7be7vKEAGM0d61Trn42Fd09GPX1nGlWOxGF9IitFyYXxp0o66q8dGyi7Xou/zpiXOe6VkXo+s27bRQzVyUsqFj41XM/MaaQ6AUJ2rJj+LvBqu5x6bAcXlI2RgaWT7X/NE6wQIbd2KVo10qVjJvu87vgjRduNZt7Luum5sLkMtJCX/TI7urN4atmoF/PS32vUBr1tgQHhO3n7nN5GupPFXSwXgY89A45+/9Nj3V+UCCHRnFyEDH3g55gDhJSiKDBlEM/O/yti/ZODo4HIi59jmMr39ma6BZEKBNtj3nwEAAP//12FN9EkCAAA
+    objectset.rio.cattle.io/id: 363b4cc6-f188-45ae-8ddc-3bef554f92be
+  creationTimestamp: "2024-01-29T19:48:05Z"
+  labels:
+    objectset.rio.cattle.io/hash: 53515dba72edc8886e71156b0f5c3666b47931ca
+  name: channel-cash
+  namespace: pay
+  resourceVersion: "6808"
+  uid: 7704f2d3-c268-401b-80d3-29c149f8d174

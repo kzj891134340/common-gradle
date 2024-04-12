@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    yypay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      proxyBaseApi: https://ext.yypay.pro/pay
+      merNo: wppay
+      md5key: 289p7DM58d14St674d62wSl1113505qi
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3ySy86bMBCFXyU6ayDcQsJsK3XXqov8WfSyGGAc3IJtgdXKinj3ykT9u+hl6e+M5rOO/QA7fZNl1daA8L1AgoE9g2LiJt2z19ZkgecJhBAcB/psDgfH4b31WoWXZaLD6L2j45Gdzn6MPMnqOGRGfCTHJ/nA4WgstgTftBlAeGON0vd37JBgFs+vWmOs361rPNruq/R+FZ8t2mY9ez9Jpu1Rxx3VIMJlUaf95aLSum36tOtKlXJ1zqUaGq5yicp+kX3jVc+yep4dCGVe1mlepOX5WjR0qiivPiLBxJ1M/zWPvI4g1Je85lPRFidV8LmVvGx4aPhSt1XXiqrVuemGVsron9nwXYa3WqZhBX36W+1qD6/BCQjPydtvfivilRT9aikDPbYEiv58pce2vSoXEPguxiOBdbLscyC8uIG9IIHXs/yrjO1LAsN73o9sjEzp/gHwxKvjPmaRbNvPAAAA///rdBQ1SgIAAA
+    objectset.rio.cattle.io/id: 3deea214-c88f-496c-bb2f-a370e3d6a30e
+  creationTimestamp: "2024-01-29T19:49:43Z"
+  labels:
+    objectset.rio.cattle.io/hash: 4804a51915f1a79e026ad6a8493b9ef4f76bd9e2
+  name: channel-yypay
+  namespace: pay
+  resourceVersion: "7323"
+  uid: 70488790-c624-466e-be8b-b734411a28ae

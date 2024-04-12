@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "13"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/7RVS2/bOBD+K8EAe7NkyrZsS7eiRbuHpjCSdA99HEbkWOaaIgWSsiME/u8LSvJr0xg97N4k8uPMfN+8XgBr+RdZJ42GHLCu3XiXwAi2UgvI4QPVyrQVaQ8jqMijQI+QvwBqbTx6abQLv+KEi7dNQVaTJxdLM7a0k4PxYNYUfxP3jnxspYk5eq8owGRwNmNzTJM0i7CYTqLZJKOomOMsWqcZS2eMpTxFOIyAW+o8P8mKnMeqhhwmbDKLWBJN5k/JNE8Wecq+wQhK0mQ7MOTJCBQWpLqA3wpkg24DOczZesb5dL7I2HI9SwucLhZrsUgnS1Gw9bJIsjSdiEmgtDd2qwyKuHFkLywdzx0p4t7YQd74LFVUYxvxDWpNKhJ7KajGNhDUWBHk8Oqqv3E18nA9gF1NPDCqrSktOfeBUCip6ZG40cJBPmdsBJZqJTm6ToZjUv6UzhvbfpaV9JAnbATnYF+gQs83n0+K/ec8Q+zeoqeyDfatUUrq8mst0FPv//mxsWWgOkn/CPWHz1817lAqLNTx+DAC39bh7+HKQDinqlZHYxe1+4v60Y1Sl+Xxv5AdEoXrtdTSB9KhmI32KDVZB/n3F5AVdowTFiezZcziZJpnWZaN9xtUIfXt+N/G8yRmMYu2Swej/v2qUWpllOQt5PBO7bF1cKuqamN97/4UzcpYD/mSnZ5VbUAFsDXecKMgh6f3Kzj8DPXkTGM5uZ6SJ1tJ3Ul8T86FgNCHrhoL2o0vbiNlSvgl/hj8R6kIRrAzqqno3jR6iLMKn0erWHe1Hd6PlSlLqc9sd0ZFqRDbMDhuPBtEuX5n95vCwuFnoCi0OwX1XjXOk/0orQuC2FBE1r8W3PENiUaR/dLbFLTGRvnodB4wxBsrffveaE/P/pWAnyxyWpGVRpwaesqOipyStpblPdb9JO6c3BtBkM8m5wQqUxbItxfz5Vqb37NyY1xdSdZ3N/qma6dT0z5cjqFARw4r5PsLKHT+yaJ28ticb8/1gO0b/U3c/Fu3srp6CtOh9/xI/u7HKxbRPOXZYr7Iih9wt0F35xrOybl1o1R7N0zWLtXoul32hfZng+9OI+nMGZ5sE/6H2bQahrPUZSf2ba5Z4JBOcza7zfUad+Z63todmUpqWTXV3ZAFqaRv40s29z3gmJzf4HOGhOYwhSO7I/HpettaQtE+XC+ei5+m4yQuAIfDPwEAAP//Fqu1XZAIAAA
+    objectset.rio.cattle.io/id: 406a5159-ab32-429e-b6a4-f59054005c5a
+  creationTimestamp: "2024-01-29T19:39:42Z"
+  generation: 16
+  labels:
+    objectset.rio.cattle.io/hash: 60f4cc367908f45ba377fd7528db0f8b19552d21
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-dwidepay
+  name: channel-dwidepay
+  namespace: pay
+  resourceVersion: "24786460"
+  uid: 1569cfe0-4a30-4b64-bed3-293f6ae71389
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-dwidepay
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-25T11:25:54Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-dwidepay
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-dwidepay:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-dwidepay
+        ports:
+        - containerPort: 80
+          name: myport
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-5ddka
+        - mountPath: /application/channel
+          name: vol-rwhbr
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-5ddka
+      - configMap:
+          defaultMode: 420
+          name: channel-dwidepay
+        name: vol-rwhbr
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:03Z"
+    lastUpdateTime: "2024-03-25T11:26:02Z"
+    message: ReplicaSet "channel-dwidepay-797dc98bd6" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-04-03T12:52:27Z"
+    lastUpdateTime: "2024-04-03T12:52:27Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 16
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

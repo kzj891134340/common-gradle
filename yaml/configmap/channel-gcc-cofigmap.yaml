@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    gcc:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      proxyBaseApi: https://gateway.gcc-pay.com/api_v1
+      payBaseUrl: https://gateway.sgate.sa
+      merchantId: M042515
+      key: 6Qo17yXp404gd8BcuylxRLjo7viEZEQ3
+      secret: 4mctnRyRhIbnFlTh2cFnUe25DczCtaLLjAIwn36yYNB80kbuWXMaXZpst5ITJmRj
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRva6cMBCFX2V1amAxP3fDtJHSJUqxd4v8FIMZgxOwLbASoRXvHsEqN0WSW/p8o/msM3dwsDeZF+sdCD8UEnQcGbSTMFrN0XqXrTyNIPRa0xd3OgVeP/hozfo8j3QaYgx0PnOw2c+BR1kCr5mTuCfnR/KR17Pz0WJL8N26DoS33hnbv+eABJNEftE65+NhXfanb7+JjovEbLY+0xzjKJn1Z7vvUHkjZWGaVKu8SqtWS9qYsk5NW6tSVcbonHelnuXYeLWTLJGnAEKRF2WqVKrqq6qorqh+8wkJRm5lfNU88DKAUIlqjGnzoslNVeVFa5QqTdeoS5k/Sfl0uVyKpuV890/suJfunZWxW0Cf/1W7OeB1DQLCY/L2J7+p/UuGfreUge5bAkN/X+m+bS/KGQTuxUUk8EHmYw6E59BxFCSIdpL/lbF9TeD44Hpg52RMe63xCJfAeieBV2zbrwAAAP//79UxrUgCAAA
+    objectset.rio.cattle.io/id: 109e32f9-c104-4bce-9f35-fb51314ffc0a
+  creationTimestamp: "2024-01-29T19:48:41Z"
+  labels:
+    objectset.rio.cattle.io/hash: 4e19ffb0290f4402bf113fd917306e3677729ba0
+  name: channel-gcc
+  namespace: pay
+  resourceVersion: "7005"

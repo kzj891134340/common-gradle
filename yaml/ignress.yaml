@@ -1,0 +1,19 @@
+  cat << EOF > ingress-nginx-config.yaml
+  apiVersion: apps.sealos.io/v1beta1
+  kind: Config
+  metadata:
+    creationTimestamp: null
+    name: ingress-nginx-config
+  spec:
+    data: |
+      controller:
+        hostNetwork: true
+        kind: DaemonSet
+        service:
+          type: NodePort
+    match: docker.io/labring/ingress-nginx:v1.5.1
+    path: charts/ingress-nginx/values.yaml
+    strategy: merge
+  EOF
+    
+  sealos run docker.io/labring/ingress-nginx:v1.5.1 --config-file ingress-nginx-config.yaml

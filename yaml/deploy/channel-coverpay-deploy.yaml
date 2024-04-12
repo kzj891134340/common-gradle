@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "11"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/7RVT2/buBP9KsEAv5skS7Lk2rwFKdrfoSmMxN1D2h7G5MhmTZECSTnRBv7uC0r+29RFD7tHko8z84ZvHl8BG/kXWSeNBgbYNG60zSCCjdQCGLynRpmuJu0hgpo8CvQI7BVQa+PRS6NdWIojLtm0S7KaPLlEmpGlrdwHLyECs/xB3DvyiZUm4ei9ogCTIZnglC0n42mcv8tFXOC0jGdVVcTjCaZULavZNBvDLgJuqc+8kDU5j3UDDPI0H8dZFmflIitZmrF8/AQRrEiT7cHAyggULkn1BV8rZI1uDQzejasCp1OaiWyS51WZ5cWEZzOcFZMMhRBZQZNlIQKlZ2M3yqBIWkf2LNJh35Ei7o3dtzc5tSpusIv5GrUmFXOzJdtgFwhqrAkYvDkaTlyDPBzvwa4hHhg11qwsOfeeUCip6ZG40cIBm6RpBJYaJTk6YFlYDI/yf+m8sd0nWUsPLEsjOBX7CjV6vv507Ni/zjPU7i16WnUhvjVKSb360gj0NOR/eWztKlDNy/8F/eHLF41blAqX6rC9i8B3TVg9XAQI+1Q36hDsunZPVPwbQeVxXi7SKStKVoyfrohPt0qda+s/6dT+lbGqpJY+dCwUY7RHqck6YF9fQdbYtytLk6yYJmmSjdlsNpuNnteogm660c/BWZakSRpvpg6i4f68VWpulOQdMLhVz9g5+J0kG2P9kP5YzdxYD2yaHq8FTHCVxhpvuFHAYHE3h933oEVnWsvJDYw82VrqvsP35FyoB32YyJGg7ejsNFZmBb/EH2r/IBX1KYR2x8071TpP9oO0LliaDW9o/Vu+jq9JtIrs54GBoApb5ePjfsAQb6303Z3Rnl78QMCR3UpOt5ybVvvTTfj56DLwJZWPFjnNyUojjmM8TiPYGtXWdOx2JVf32Az+20e5N4KAFfmp88qslsg3Z66yNSrG/EebwS760yi/MakQ7u/JajOG3ffdMNPo234OjqP6cG4+gY7cD9/XV1Do/MKidvIwVdfdPGCH8b7AnQ/p9Kn/qHolBE8YMj+Sv/n2hkU8Kat3YiJK/g1u1uhuXMs5OVe1SnU3ez/tRYKu/8E+0/Mp4O3RiE6cYWHbsN470nxvyVKv+mZf41rEaRbns0U2ZmXOysk1rr/Cnbie/uqeTC21rNv6Zv8KUknfJeds7gfA4XH+gM8JEsbKLIOgSXy8/GMtoegeLr+bs0XbcxJngN3unwAAAP//L69dVIYIAAA
+    objectset.rio.cattle.io/id: dce1b638-272d-4a85-9ff4-36a0efbf9813
+  creationTimestamp: "2024-01-29T19:39:31Z"
+  generation: 13
+  labels:
+    objectset.rio.cattle.io/hash: 73f4a88e9d1622f51246c19a9461addd14e6b4d5
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-coverpay
+  name: channel-coverpay
+  namespace: pay
+  resourceVersion: "24786502"
+  uid: f447515a-fc57-4c3b-81bf-d2ee637f60f0
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-coverpay
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-31T08:57:41Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-coverpay
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-coverpay:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-coverpay
+        ports:
+        - containerPort: 80
+          name: port1
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-a2ju1
+        - mountPath: /application/channel
+          name: vol-z6gk3
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-a2ju1
+      - configMap:
+          defaultMode: 420
+          name: channel-coverpay
+        name: vol-z6gk3
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T23:00:45Z"
+    lastUpdateTime: "2024-03-31T08:57:50Z"
+    message: ReplicaSet "channel-coverpay-69bc8cdf6f" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-04-03T12:52:30Z"
+    lastUpdateTime: "2024-04-03T12:52:30Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 13
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

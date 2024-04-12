@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    vt:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      proxyBaseApi: https://api.vientianepapay.com
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRTY/bIBCG/0o0Z9sJ/ky4VuqtVQ/ZHPpxGGCIaTEge7SVFfm/V3jV7aHtHnmfYR708gBM7kbz4mIACc8CCjDICDKT5J1GdjFUK04+c5Zfw+GQcP0Y2dn1afbyMDIneTxictXPET0tCdcqEOfk+JJ8wvUY8g3YCvjhggEJ72Kw7v4BExQwEeOrNoTIu3XJx6i+k+aFuJpdrDQye6pcPLq843QxAntly7btbdmqwZRKdKYcVFMPRg9G0SUr9Uz7xqubaGGcEkioT3VTClGK7ipa2XWyaz5DAR4V+TfNIy4jSGh0L/RZ96du0KfLua+pFYMw2A6qPjdmsE1j61rt/gkD3sm8d+TNAvLLv2q3O7yuiUDCy+TtT34T+UlW/m6pAvnYCrDy7196bNurcgYJeKfAUEBMNO9zIOEpGWSCAthN9L8ytm8FBNy5HjEE8uVzXpSzJaHOIOEK2/YrAAD//w/qdgdHAgAA
+    objectset.rio.cattle.io/id: 09d1a6bf-446f-4b7d-b15d-7b327dc7dbe9
+  creationTimestamp: "2024-01-29T19:49:27Z"
+  labels:
+    objectset.rio.cattle.io/hash: 3c61c8c6057c09862e4171da47b283d7f33f22b9
+  name: channel-vt
+  namespace: pay
+  resourceVersion: "7285"
+  uid: a0c473b6-bc88-4519-adb4-020325c4b705

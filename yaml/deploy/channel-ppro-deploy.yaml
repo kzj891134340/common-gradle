@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "6"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWT6/auhP9Klcj/XYJJIQAya5q1f4WvRVq6Vv0z2Kwh+CLY+fZDtwI8d2fnAAhvZeqi+6IOXM8Z8547CNgJf4hY4VWkANWlR3vYwhgJxSHHN5RJXVTknIQQEkOOTqE/AiolHbohFbWf/IrbrSr12QUObIjoceG9uJMPoMA9PqJmLPkRkboEUPnJHmY8JslfMNwRknIovkmnMYJhusFj8IsStJNmi4SWiOcAmCG2p1XoiTrsKwgh0k0ScI4DuN0Fad5tMjj6BsEUJAi04IhnwUgcU2yTfheIlu0W8hhMZ/HPJtknCbRIskWbBLPp5Npmkw5W8eLKZ+nlPCUIICDNjupkY9qS+aG6bJuSRJz2pzLO+pLFVbYhGyLSpEMq8poL05hSZDDYLlbtRUy/1eFjQfaiphXUhldGLL2HSGXQtEXYlpxC/ksigIwVEnB0EIe+4/OjP8L67RpPopSOMjjKIA+ySOU6Nj247VSf1Wfz9sZdFQ0nttoKYUqvlYcHXV7P3+pTeFlTtL/+Z7D568K9ygkruVl+RSAayr/9XlA4NeprOSF7H6/9jLcsImmYRSHcbzyHTTP4/jbnYZTtZS3/fTXq3R2FzcboYTz1fKJaOVQKDIW8u9HECW2pYqjUTxdjKJRnORZlmXjwxal75dmfEucxx4S7hYWgi52WUu51FKwBnJ4Iw/YWLjXgpU2rtv2msVSGwf5IrqGXKBGO820hBxWb5dw+ulbz+raMLKdEEemFKot6iNZ61NB5w/emNN+fPNvKHUBr+Ivab8X0h/DvZZ1SY+6VucsS//zwopVewx8/FjqohCq17nXMuTVwWVwCn4Tdi7HMK7Yl9unl3G+68Y7asZD9OGwW7+ClrqwQ+DGTrPnO7SGvBPjm8FwDsJ/n/YNnH76cnNlrwV6K2vryLwXxvopbnwLG/fSdsu2xGtJ5lPHyWmDtXThdd1jiNVGuOatVo6e3QszPxhktCQjNL/OoSS6uHNtn40oHrHqLo52k0fNCfLppG8lqYs1st3NSBz69Gcsd6br0LqttucSH6F6xcHzrPklvjfzbrw39mLU6yS90XdJhn6/TnO1vhuw6Op2KF3n5ufbW8DbIs6T8PsRJFq3MqisuIy4+9epx3aztscNJ+Zk8a19KbRn1A/obucv5B5+DNwIZ9ksXc/SdPoDHrZoH2zNGFm7qaVsHi6XGvFR27Jo2yfEJzr0hG+ut0KvGVampr5MyzONUEVb5HtaWw2TbBUneZrk0fS3Wn/B9Vr7x1IrqBRKlHX5cHZBSOGagZrHDnAx5w/09BB/yPXaktkT/zB85BhC3nwe3vs3H3Wrid8ATqf/AgAA//8CgxHWBwoAAA
+    objectset.rio.cattle.io/id: 3dfca6e3-c07f-413a-b8d0-9035f5583eba
+  creationTimestamp: "2024-01-29T19:42:10Z"
+  generation: 6
+  labels:
+    objectset.rio.cattle.io/hash: 8771d929de208398c217424534dcb184d75e3d5e
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-ppro
+  name: channel-ppro
+  namespace: pay
+  resourceVersion: "20142205"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-ppro
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-23T10:24:26Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-ppro
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-ppro:1.0.1-k8s
+        imagePullPolicy: Always
+        name: channel-ppro
+        ports:
+        - containerPort: 80
+          name: ppro
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-dpwt9
+        - mountPath: /application/channel
+          name: vol-gvmhj
+        - mountPath: /data/key/
+          name: vol-wwkbj
+        - mountPath: /logs
+          name: vol-fs49x
+        - mountPath: /data/report/ppro
+          name: vol-aqjvy
+      dnsPolicy: ClusterFirst
+      nodeName: prod9
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-dpwt9
+      - configMap:
+          defaultMode: 420
+          name: channel-ppro
+        name: vol-gvmhj
+      - hostPath:
+          path: /data/key/
+          type: ""
+        name: vol-wwkbj
+      - hostPath:
+          path: /data/logs/ppro
+          type: ""
+        name: vol-fs49x
+      - hostPath:
+          path: /data/report/ppro
+          type: ""
+        name: vol-aqjvy
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-03-15T10:57:02Z"
+    lastUpdateTime: "2024-03-15T10:57:02Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2024-01-29T20:37:05Z"
+    lastUpdateTime: "2024-03-23T10:24:30Z"
+    message: ReplicaSet "channel-ppro-5b548cd445" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    spring:
+      cache:
+        type: redis
+      redis:
+        database: 0
+        host: redis.database
+        port: 6379
+        jedis:
+          pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1ms
+            min-idle: 1
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRTc/bIBCE/4o1Z9uFmMR+uVbqrbc0h34c1rBOaG1ABlWKIv/3Cqd9e+jHjZ1ZzYNmH6DoLrwmFzw0vkvUsJQJujhxdoayC7690zJDI8XV+av+7KvKkLnx/qqqfI+sq5WtS0XYHz+tEjZSYl2Jp3AL2Gp8c95C423wk7u+p4gaC2d6RXsf8k5OZQzjVzY5cW5XF1pDOc/cuvDGlQzqBCsrXxox0NgoHoaGeraNkHIUx8makxEFaVbeE89u4ZRpidA4iEPXSNnI41kqfVRaiI+oMdPI83/JN0o3aCiW8mQNkTwMqlMTjWoyXTccDJte0QtR35966gp/IU9Xtu8czzZBf/pb9dNunu+RofHcvPzWL7J8adK/WmqhH1uNSf95qce2vSLXUtKVfUaNEHnd96DxIVrKjBrZLfyvMrYvNTzt/n5xPMcUyRQt0h3b9iMAAP//3ZdegEYCAAA
+    objectset.rio.cattle.io/id: a30e4d19-08ab-4e88-a7ed-011b05fdc6c0
+  creationTimestamp: "2024-01-29T19:47:45Z"
+  labels:
+    objectset.rio.cattle.io/hash: 4e116dcaa128434fab4fc3382cec74a9aa7767a3
+  name: cache
+  namespace: pay
+  resourceVersion: "6681"

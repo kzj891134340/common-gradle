@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "5"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWwW7bOBD9lWCAvUmypFiOpVuQot1DUxhJuoe0PYzIkcyGIrUk5UQw/O8LSrZl79bbHnozqcfHeY/DR28BW/EXGSu0ggKwbe1sk0AAL0JxKOAdtVL3DSkHATTkkKNDKLaASmmHTmhl/ZAfcdFLV5JR5MhGQs8MbcSePIUAdPmdmLPkIiN0xNA5SR4m/GbIF2k6r/KQsUUezrM0D3OsMKQ5W3Jky5LFGewCYIaGnZ9EQ9Zh03ryOJ2HcRKm+VO8LLK0yPJnCKAmRWYAQ5EGILEkORR8qZA12jUUUC1v4pinrLxeLDBJFzmPs2XFid+klCzi7LrMGfKbCgJ41eZFauRRZ8mcMB3mLUliTpu9vdFkVdhiH7I1KkUyZH7jXQAKG4ICzqbHWdsi859a7D3QtsS8ktbo2pC17wi5FIoeiWnFLRSLOA7AUCsFQwtF4gfjYfwprNOm/yga4aBI4gCmIrfQoGPrj0enfqs+X7cz6KjuPbfRUgpVf245Ohr3fnvsTO1lptkfvufw7bPCDQqJpTxM7wJwfetHD2cEfp6aVh7ILvfrJMNdbqJlMV88X2g41Ul52k+/3aX96WJVCSWcd8sXopVDochYKL5sQTQ4WJXEUTJfRnGUXBd5nuez1zVK3y/97JS4SKI4isOXpYVgXLvqpFxpKVgPBdzKV+wtXGrBVhs3bnusYqWNg2IZH5d4jIca7TTTEgp4ulvB7ptvPas7w8iOQhyZRqjB1Huy1peCzl+8GafN7ORrKHUNP8Qfyn4vJEEAGy27hu51p/ZVNv7ngRXb4Rr49TOp61qoSedGy5Cty79z2AX/s2xvx/m6xry577D75iVyZY9F3cnOOjLvhbHeEOPbxrj/Wm3ZmngnyXwaOTlV2EkXHuc9hlhnhOvvtHL05kYDLZmNYHTLmK93Wgn//nROfG7lB4OMVmSE5sfUuI4PXh4PuxL1PbZjzA8s95oTFPN0Onip6xLZy0mAnbv6aywXsvDM6DFC0HXDtTsmw8NpznkpYn/Xv2xBonVPBpUVh0t8+cHw2DFNfoxbFln8PLyFQxf6CBp3fiR39fVMQZiVizmvsiovv8LVGu2V7Rgja6tOyv7qkNvEhwZBOzySn+h1Irw95t6kGZ5M58f7AFztWYSqB6N/pjW5HrRmP9N6ipu0Tn8HBj2NUKLpmqv9KQgpXB+dqrkfAYfD+QU9E8RfKV36Zib+4fwZN4S8fzh/2U4G3aCJnwB2u38CAAD//yCoKUbpCAAA
+    objectset.rio.cattle.io/id: ad6224f9-cc69-4529-9afa-e4c8dac8bc05
+  creationTimestamp: "2024-01-29T19:38:17Z"
+  generation: 8
+  labels:
+    objectset.rio.cattle.io/hash: f8700d2cb366a1269d058fded72e16053b9cad7f
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-cash
+  name: channel-cash
+  namespace: pay
+  resourceVersion: "16976439"
+  uid: 12eca128-e4a9-4617-8f17-57eb4147e1df
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-cash
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-02-17T13:20:24Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-cash
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-cash:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-cash
+        ports:
+        - containerPort: 80
+          name: port
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-chbq9
+        - mountPath: /application/channel
+          name: vol-mrxtj
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-chbq9
+      - configMap:
+          defaultMode: 420
+          name: channel-cash
+        name: vol-mrxtj
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:03Z"
+    lastUpdateTime: "2024-02-17T13:20:37Z"
+    message: ReplicaSet "channel-cash-f69d5cdfb" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:05:21Z"
+    lastUpdateTime: "2024-03-15T11:05:21Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 8
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

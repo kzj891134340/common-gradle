@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "4"
+    field.cattle.io/publicEndpoints: '[{"addresses":["10.190.0.4"],"port":80,"protocol":"HTTP","serviceName":"pay:assets-server","ingressName":"pay:merchant","hostname":"merchant.whalespay.net","path":"/","allNodes":true},{"addresses":["10.190.0.4"],"port":443,"protocol":"HTTPS","serviceName":"pay:assets-server","ingressName":"pay:merchant-console","hostname":"console-merchant.whalespay.net","path":"/","allNodes":true},{"addresses":["10.190.0.4"],"port":80,"protocol":"HTTP","serviceName":"pay:assets-server","ingressName":"pay:console","hostname":"console.whalespay.net","path":"/","allNodes":true}]'
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWTY/bNhD9K4sBepNkyZYUW7cgaZJDEhiJ00PWQTEmRza7FCmQlL2C4f9eUB/+2MZBDwEWWGs4fJr3ZvioI2At/iJjhVZQANa1newTCOBJKA4FvKVa6rYi5SCAihxydAjFEVAp7dAJrax/5Oe86KnZkFHkyEZCTwztxQCeQQClIMkjhs5J8st1s5GC/al4rYVyFgp4PK4BOTdkLdk1FI9rSOIoWcRRHKVr+BGsodbGraGYx/630U4zLddQrOHDarVcQ7AGS2YvGASgN/8Qc5ZcZIS+eq/w5Pg0L19tUgxzhhimaZKGyFkcJgxxvlgk85xyOAXADHVMV6Ii67CqoYBpPJ2FSRIm2SrJijguZvl3CGBLikyXDMU0DUDihmSn0L1Kdmh3UMBmhmU+zRc5sumUE+ZlzBLKynmalMkmT/I0fZXO5hwCOGjzJDXyqLFkrpDGuCVJzGkz9DO69CassQ3RWnI29BKR8fQUVuRzb+J92NbI/FqNLQTQdKqVmExzniQhm8VpmLJ0E+KrpAwpz9JNjBnGJXlYWxPzxGujt76bbwm5FIq+EtOKWyjyOA7AUC0FQwtF4h/6YfkgrNOm/Sgq4aBI4gAunI5QoWO7j2dhf68cvnBn0NG29eBGSynU9lvN0VH/8uevjdl6UabZH/5Q4PM3hXsUEjdyDJ8CcG3tn77cAPg4VbUcwa4O1E+GTDVSXo/Q72c6tAjLUijhPGM/7lo5FIqMheLxCKT23f9hTPrtfzOtrJYEAexRNn5hiESHHUo/OG2kyBWTw+EwGZNPwUuYigzbYecuI84Y+hnQOf0+0v3Kwl8hDzmXgk4/AhAVdp1+aqVQPjxRW6Gew1KbAxpeJFEcebPs8paNlEstBWuhgNfygK2Fu4fLW1gv71ntpTauM7Vxj8/x6KPFQQGrN8uuMENWN4aR7TvmyFRCdePziaz1xaDzrjLhtJ9crYZSb+Gn+WPh70QvnZZNRZ90o4YyK/9zRD0cDhdqey3DTFXbFk4/fG1c2TPaG9lYR+adMNa3WGlOnwdyRvMZdEwcGvdf4SzbEW8kmWEDpxIb6cJz3OcQa4xw7RutHD27Xoze++k1Y77ky054uXQLfCvLe4OMlmSE5me/msWjLr0kO20HRY5Qj3qjw0lttPf6QabBCK6c9kax3nHQNd0RPxvJl2tf9AWI4a59PIJE61YGlRWjYdy/kHxubz6XvDSMkzCZr+JF4f+y793d3s2Bd6z+zV/JPaxv5zbMsnLBsvlmsVjDww7tg20YI2vLRsr2YTR66tqKtrv0P9PhAvj6bJMXzrAyDV1kWg4gQm27Q36Pa8dhulglsyKbFfH0l1xf5F24Xj5vOjqVUKJqqoehC0IK10bXbD71CWNz/gefS4o/G3rTKcnfv/hMMIS8/XJ7FV49NB0pfpVwOv0bAAD//wIHPyy6CQAA
+    objectset.rio.cattle.io/id: d26f7b4a-6caa-4414-adc0-1caa899186e6
+  creationTimestamp: "2024-01-29T19:36:33Z"
+  generation: 4
+  labels:
+    objectset.rio.cattle.io/hash: b3af62696ac22dea6f0c1e5f841f1b616447438d
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-assets-server
+  name: assets-server
+  namespace: pay
+  resourceVersion: "16973524"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-assets-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-01-29T22:53:21Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-assets-server
+    spec:
+      affinity: {}
+      containers:
+      - env:
+        - name: server_console
+          value: console.whalespay.net:/www/console
+        - name: server_merchant
+          value: merchant.whalespay.net:/www/merchant
+        - name: server_merchant_console
+          value: console-merchant.whalespay.net:/www/console_merchant
+        image: kylinchan/nginx-forward:1.0.1
+        imagePullPolicy: Always
+        name: assets-server
+        ports:
+        - containerPort: 80
+          name: port1
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /www
+          name: vol-5nmgy
+      dnsPolicy: ClusterFirst
+      nodeName: prod9
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/project/www
+          type: ""
+        name: vol-5nmgy
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T19:36:33Z"
+    lastUpdateTime: "2024-01-29T22:53:46Z"
+    message: ReplicaSet "assets-server-576d8bc86d" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T10:57:02Z"
+    lastUpdateTime: "2024-03-15T10:57:02Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 4
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

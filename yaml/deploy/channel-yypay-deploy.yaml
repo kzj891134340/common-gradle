@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "3"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWzY7bOBN8lUED302SJf+LtyBB8h0ygTHj7GGSHNpkS+aaIhWS8oww8LsvKPlPu/Egh9xMqljsKjaLfgWs5V9knTQaGGBdu9E+gwh2Ugtg8IFqZdqKtIcIKvIo0COwV0CtjUcvjXZhKM64ZNdsyGry5BJpRpb28kg+hgjM5m/i3pFPrDQJR+8VBZgMm2Wi4IuiyOIxpRhPKS3ifDER8Wwxn80WhUjHmYBDBNxSt/NaVuQ8VnUgT8fTOM3i8WKdzdlsyrL8CSIoSZPtwMDGESjckOoKvlXIFt0WGOTTSTbnYr7hBedLSpezdELzZV7k+Ww5mRfpjLLlZhKcejZ2pwyKpHFkr5hO844UcW/s0d7kYlVcYxvzLWpNKm7bGtugTmNFwGA430+7Gnn4dkS6mnjQUltTWnLuA6FQUtMjcaOFAzZP0wgs1UpydMCyMOiP4//SeWPbz7KSHliWRnAp8xUq9Hz7+ezVn1UYCvcWPZVtILdGKanLr7VAT/3mL4+NLYPO8ex/oe3w5avGPUqFG3WaPkTg2zqMHgYEYZ6qWp3IbrfsRYe/0UcLlo7ZdPF0o+d0o9R1S/15m47ni0UhtfTBrlCJ0R6lJuuAfXsFWWHnVZYm2XSZpEk2YXme56PnLarQMe1owMyyJE3SeLd0EPWLV41SK6Mkb4HBO/WMrYObbVgb6/uNz3WsjPXAlul5TcAEqDXecKOAwfr9Cg4/Qvs501hOrpfiyVZSd77ek3OhFvTh+o0E7UdXX2NlSvgl/lT3R6kIItgb1VR0bxp9rLIKP0+sWHdXIawfKVOWUl+E7o2K5+X2pYRD9Mayox/DdXrHf/6Ew48gUWh3Luq9apwn+1FaFwyxoXOs/6/Xjm9JNIrsl55TUIGN8vF5PmCIN1b69r3Rnl58b6Aju5ec3nEe6r2shH9/GhIPrfxkkdOKrDTinByT9OTl+bALWd5j3Yd9x3JvBAGbji8Hr0y5Qb67SrGhq7/HcisRB073MYK+6a7eOR0ersMuaJHH+/7tFRQ6v7aonTxd5NvvRsD2ifILXJcLs+lT9yR2bRhiqN/5kfzd96GEeCMEn+ez5fw73G3R3bmGc3KuaJRq707hTaLrEHTdW/mFni+E787Zd9EMa9uE8TEEV0cWqXun39aar7MJm01YOn5b6xB30Xr5V9DpqaSWVVPdHU9BKunb5FrNfQ84Hc5v6LlAwp0ym9DNJD4NX3NLKNqH4fN2NWg6TeIKcDj8EwAA//9cUxYk8AgAAA
+    objectset.rio.cattle.io/id: 1dfc7ff1-2e0a-4e0f-973d-576557fd021d
+  creationTimestamp: "2024-01-29T19:42:58Z"
+  generation: 5
+  labels:
+    objectset.rio.cattle.io/hash: 94316cd6bcfcc8e08503e689f995836f05e18b31
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-yypay
+  name: channel-yypay
+  namespace: pay
+  resourceVersion: "16976183"
+  uid: 15db4b65-c5d9-4836-80bf-ea9b41386652
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-yypay
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-02-17T13:20:24Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-yypay
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-yypay:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-yypay
+        ports:
+        - containerPort: 80
+          name: port
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-6ghxg
+        - mountPath: /application/channel
+          name: vol-nkcqq
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-6ghxg
+      - configMap:
+          defaultMode: 420
+          name: channel-yypay
+        name: vol-nkcqq
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:03Z"
+    lastUpdateTime: "2024-02-17T13:20:41Z"
+    message: ReplicaSet "channel-yypay-56ddc94b8d" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:04:43Z"
+    lastUpdateTime: "2024-03-15T11:04:43Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 5
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    settle:
+      pproLocalFilesPath: "/data/report/ppro/"
+      groovy:
+        LoadChannelPaySettleServices: "classpath:/groovy/LoadChannelPaySettleServicesImpl.groovy"
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRza7TMBCFX6U66/z/yI23SHcFEovSBZTFJJ60hsS2bOtKVZV3R07FZQHc5cw5M9/ozAPk9Jl90NZA4rVGBkWRIJPiFj1R1NYUd1oXSASOcWF5MYeDc95+tBMtL3rh8JniTR4uKNNw6dlZH8tkKS9I7qu39vW+Dx6wZfipjYLEB2tmff1EDhlWjvSGNsbGnRxSaccfPMXAsfDaFhOlIwptS512zD03g6AhP3YN5Z1oVT6KrsvbpqKRqqGjqk3IyfO+8aRXDpFWB4mmatq8rvO6P9Wd7IVs2q/IsNDIy7vkG4UbJER7rFTVzmOlekHV0PbHaaZBtWJmIVTP3TRU/SQSfyVDV1YvmhcVIL/9K/p5F093x5B4Os9/+uc6nTTL3ykVkI8twyz//tRj296QHhJ0ZRORwTr2uw8SX5yiyMgQ9cr/C2P7nsHQrj+fj2cdHE2p6eiObfsVAAD//2egHVBHAgAA
+    objectset.rio.cattle.io/id: f5e297a9-842a-473d-b744-320aba094a03
+  creationTimestamp: "2024-01-29T19:51:06Z"
+  labels:
+    objectset.rio.cattle.io/hash: 7380d03fb0d57a09358cfa9d37fe77d5e4c905c7
+  name: settle
+  namespace: pay
+  resourceVersion: "7791"

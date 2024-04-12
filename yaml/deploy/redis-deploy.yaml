@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xVTW/iSBD9K1FJe7PBxhiCb6OMZnalSYQSZg/zcSi6C+hNu9vqLpNYiP++ahsbshukOcyNLj9e16t6VX0ArNTf5LyyBgrAqvLjfQoRPCsjoYCPVGnblGQYIiiJUSIjFAdAYywjK2t8OMoBN3qu1+QMMfmRsmNHe3UiD7R2/Q8J9sQjp+xIILOmAFPhMrHJSMh0HU/ySRZPxUbEOJ3LOE0niJgtkvlmCscIhKP25pUqyTOWFRQwSSZZnKZxmq/SvEiyIsm/QQRbMuRaMBRpBBrXpNuEryWyQ7+DAua3yWKRLwg3a8wyMZ3Pp5PZIp9lt2KRU5biYjqT8ySBCF6se9YW5aj25C6Y+rgnTYKtO5V3dC5VHIq5Rk+xI6l8kGawJCigO3dHX6EIsR4cYL4iEVRUzm4def+RUGpl6ImENdJDMUuSCBxVWgn0rfS+EX8qz9Y1X1SpGIo0ieCc4AFKZLH7MlTpN2oLWbNDpm0TmJ3VWpnt10oiU3fz61PttkHpJP8juA1fvxrco9K41n34GAE3VTg9viEIcSor3ZNdOPUdt5ha60sz/GaZp+bgZqOM4iA3mNYaRmXIeSi+H0CVuB06XcxHySgNZmrDy1rrpdVKNFDAX5sHy0tHvpvB/xikso47woF/aR1DMcvmiwG9Y64C2Fm2wmooYHW3hOPP4ApvayfId0kyuVKZtlz35H3IBTnMw1jSfnzxNdZ2C+/i+7w/KU0Qwd7quqR7W5tTnmX42bPW3o21FajHxGJ86Xoowl9jqXcVwvFnyFUaP7Df6dozuU/K+VAVFzrrePj8Qb9gE6i82JGsNbmHjlPSBmvN8RAPGBK1U9zcWcP0yv+rxGeHgpbklJXDfGVJL61TtbP+JOoAVV8yZOw0jYU1GxisezHobzR2M4Jct6YcrP94OcbhfnVau98PoNHzyqHxqrf49V0YsN24XMXNv7Vrvu1kmLHu5ifimx+d5eL8Np/mcrqYr3/AzQ79ja+FIO83tdbNTb+PSI7arqBvN/8DvZypPgwjfVYLK1fTuUDLE40yWzhG11VO4ySNJ4tVmhV5ViSzayrfw51Vnt+4VlCpjCrr8uZUf6UVN2/U3HeAvi2/oOcMCT62a09uT/Lz27fJEcrm8e3KvjjUrSZ5ATge/w0AAP//wthNxb4HAAA
+    objectset.rio.cattle.io/id: cf3ecd1b-2523-4cfc-a47d-112aaa3907f4
+  creationTimestamp: "2024-01-29T19:45:20Z"
+  generation: 1
+  labels:
+    objectset.rio.cattle.io/hash: 7809959eafba33c47742695638c95e31a946d700
+    workload.user.cattle.io/workloadselector: apps.deployment-database-redis
+  name: redis
+  namespace: database
+  resourceVersion: "16974621"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-database-redis
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-database-redis
+    spec:
+      affinity: {}
+      containers:
+      - image: redis:7.0.10
+        imagePullPolicy: IfNotPresent
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/local/etc/redis
+          name: vol-dlhpa
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/redis/conf
+          type: ""
+        name: vol-dlhpa
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T19:45:20Z"
+    lastUpdateTime: "2024-01-29T19:45:29Z"
+    message: ReplicaSet "redis-7b6db7967c" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:01:20Z"
+    lastUpdateTime: "2024-03-15T11:01:20Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

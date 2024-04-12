@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    spring:
+      data:
+        mongodb:
+          uri: mongodb://pay:pay.com@mongo.database/pay?minPoolSize=10&maxPoolSize=150
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRT4+bMBDFvwp6ZyALGBJ8qlSpt97SHPrnMMYD6xZsy3ZXiiK+ewWbpoe2e/O89zQ/680N5M2FQzTOQuKlQg5NiSA3x89moGScLa+0zJCIPhg7ya82y7bU/siyxdnJaXWfsuxnMPIhHg6ertLTtRzc8m5xWHP8MFZD4r2zo5k+kkeOhRM9wNa6tHPjNjr1nYcUOZXBuHKglGYujTuYbYdWoz7W3Vg0jRaFGI510bd6KPpTc+rasevF6bQhh8D7xrNZOCZaPCTqp7opqqqo2nPVyqaTT+IzcsykeH6T/EzxGRJcNeJYiUb1neqPtVBD04iKOtW1StS9UiyU0p3a+AtZmlh/MDzrCPnlX8WPu3m+eobEa/LyR79U25dG+bulEvK25hjl33e6resDGSBBE9uEHM5z2HOQ+OQ1JUaOZBb+XxnrtxyWdv9+T7wK0dOwqRQjp1hEDi8csK6/AgAA//84oNyVUAIAAA
+    objectset.rio.cattle.io/id: dbfd726f-33d4-4c72-95dc-983865f69488
+  creationTimestamp: "2024-01-29T19:50:40Z"
+  labels:
+    objectset.rio.cattle.io/hash: e1347143b96b9724bc3341a6b65b429bbe4bbd6b
+  name: mongodb
+  namespace: assets-server
+  resourceVersion: "7662"

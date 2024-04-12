@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    cadopay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      payBaseApi: https://mx.api.cadopay.com/PayApi
+      proxyPayBaseApi: https://mx.api.cadopay.com/PayApi
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-03-04T08:50:08Z"
+  name: channel-cadopay
+  namespace: pay
+  resourceVersion: "16262532"
+  uid: 0be8bd64-6f12-492a-9f03-1d05c4bf1219

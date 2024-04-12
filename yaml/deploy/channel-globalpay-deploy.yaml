@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "19"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/7RWT2/buBP9KsEAv5skS/4r81a0aH+HpjASdw9pexiRY5kbitSSlBMl8HdfULItO9kEPezeTPFxOO/N8I2fAWv5B1knjQYGWNdutMsggnupBTD4RLUybUXaQwQVeRToEdgzoNbGo5dGu7AUJ1xy3xRkNXlyiTQjSzt5CJ7NIQJT/EncO/KJlSbh6L2igJPhNp7P8iJbjGOeLqfxdDafxEhzjNM5JzErMiGKGewj4Ja6q9eyIuexqoHBOB1P4iyLx8t1umSzBZtmdxBBSZpsBwaWzSNQWJDqUn4rky26LTDIC5yNcz6Z0ybHTTGfLUSa0pgwx+U4Ezmf4UTgdAoRPBh7rwyKpHFkzyIdvztSxL2xB4GTQay4xjbmW9SaVFwqU6CqsQ0UNVYUFHm112+5GnnYP6BdTTxwqq0pLTn3iVAoqemWuNHCAZunaQSWaiU5OmBZWPSF+b903tj2q6ykB5alEQzpPkOFnm+/njT795mG5L1FT2UbLrBGKanL77VAT30Cj7eNLQPX8ex/oQnx8bvGHUqFhTp+3kfg2zqsbi4ChO9U1eoY7O0GHrj4y6aaxmkWZ9k6zVm2YFl290YD6kap8/b6b6Q61Bk3G6mlD5KFbIz2KDVZB+zHM8gKO72yNMmmeZIm2YQtl8vl6GGLKnROO3oVnWVJmqTxfe4g6gOsGqVWRkneAoMP6gFbB++2ZW2s7xM45bMy1gPL09O5C7w13nCjgMH64wr2v0JPOtNYTq7n5clWUndCX5NzISn04W2OBO1GZ7uxMiX8I/5I4LNUBBHsjGoqujaNPqRahZ/HqFh37yOcHylTllIPjHdGxUo/tU+wj945dhDm8pwvnv4SsP8VKArtTkl9VI3zZD9L64K92tBK1r8W3fEtiUaR/dbHFLTBRvn49D1giDdW+vaj0Z4efS+gI7uTnD5wHvIdTsLLrcvAl1J+schpRVYacbKTSXrU8lTxjSyvse5nQRfl2ggCNh0P1VemLJDfn9nbpaq/F+U9u7xQu/cW9E33Hk+WcXPugoGPPJjAj2dQ6Pzaonby+LrfniwB29vMgLs0i/H0rpuaXSsGb+pvviV/9fM1jXi+yJfTfDGdFT/haovuyjWck3ObRqn2qrP2rkvQdeP0Gz0MAT+cDHHgDGvbhPXBGVeH2SB12an9FteOw3i5ziZsNmHp+1xf4Aauwx+Hjkoltaya6upQBamkb5NzNtc94Fic3+AzQMK7MkXoaBJfXsx7Syjam8vBd7ZoOlLiDLDf/x0AAP//MnvGYhQJAAA
+    objectset.rio.cattle.io/id: c858b172-c094-4563-ae6a-06ced5b1ddb5
+  creationTimestamp: "2024-01-29T19:41:53Z"
+  generation: 21
+  labels:
+    objectset.rio.cattle.io/hash: 8ba528c36ef8afb657d00e2ea8a921d8c5a3da44
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-globalpay
+  name: channel-globalpay
+  namespace: pay
+  resourceVersion: "16976599"
+  uid: 1bd207d3-3f32-4fba-9699-70d8a3f5c819
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-globalpay
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-15T06:32:21Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-globalpay
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-globalpay:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-globalpay
+        ports:
+        - containerPort: 80
+          name: globalpay
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-lnzyz
+        - mountPath: /application/channel
+          name: vol-tbzqd
+        - mountPath: /logs
+          name: vol-g7a4o
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-lnzyz
+      - configMap:
+          defaultMode: 420
+          name: channel-globalpay
+        name: vol-tbzqd
+      - hostPath:
+          path: /data/logs/channel-globalpay
+          type: ""
+        name: vol-g7a4o
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:05Z"
+    lastUpdateTime: "2024-03-15T06:32:26Z"
+    message: ReplicaSet "channel-globalpay-55f78f69b4" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:05:42Z"
+    lastUpdateTime: "2024-03-15T11:05:42Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 21
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    newglobalpay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      payBaseApi: https://naskl.gctpk.com
+      proxyPayBaseApi: https://taslk.gctpk.com
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-03-14T10:15:51Z"
+  name: channel-newglobalpay
+  namespace: pay
+  resourceVersion: "17764718"
+  uid: 0a3fe8f3-5aad-4077-a758-18f8732e5560

@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    oepay:
+      payBaseApi: https://openapi.oepay.co.in
+      proxyPayBaseApi: https://openapi.oepay.co.in
+      privatekey: MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAMGAdwkeo5322b+orzXp9/3qixCTQSliAU9W5ugR1dqFyRpT7oZR2a9O18Hmk8QN3rRE+mTZTv2H4nTUgH0v53PhEaXY3vFRRKTXpceHPgzzJJw657d5diKioGk3y0LbQfnKO9/XUQ6yVxeNGPc/SKpfgHBwQ4UZduqvyiuOwinjAgMBAAECgYAx3+bOlvMdOA8P826VuuSMsfN+JjZZcEVeKcwCbPZuCKW4/4EvZdFx+iRqegAEPH72gAD6FXjiqC+aZVto6PwC0oE6pANvtIj2iEt9OVrgcAy9YgKgsYFhkUKCNFNDMokj8RmzqH4VXHb8qrAPds0MC4n3o3co3aSMj0w6NHGrIQJBAP1c29d+oA3bVP/aqDUphMnkIx9oHbkpYzoeWtdACxK8oVJ7yKAmhwBQsfQ982M52AcWSMct7lzaEANdZYSwHdcCQQDDhBfxw+vJAjXwX+wk6p2ymZA5BTpFoh2C/3zn4xBp06EtpbWVWAckOoNlnslRSj9FeHlLYiW6aK/wP0kXKprVAkAFHlcip2A8Z230LUqwqEISghVjkQrorrledzaGmriejEkGDZIkCiM4EmlF8ep02rpOili2DWt/XLhuGPjwEU7JAkAvN3Bc55bCpXEHSvMJe0t4PVOyIYwQEvWTlEXC7nghRoWPM4yls2uOGT9wRCeUJR0gltacGOjJmsyadX4eRSC9AkBng0larbe2DPLCvDsinXni9fbb1VGpkEufY93JR7W2DcMjJngy/oYUZKr3hE4pw5z8t9FYzZ4RdOPolukaC0rQ
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKVA0aHWa1wMKYYN1mYclmxmUytmNxVTEvLTSIVPIxzNJPzl8H+/PpUxpLnVZb4uUVvC5f/7CmvZVY9r2fV2JE6MRkkK5wLolbbhHrt98+2zoMtBlA4IvdCsX/JnuXFweZHA5va4KVupp3HY2+PteZ++kqTdvMNjwgzHYngr3lawIDAQAB
+      md5Key: FF2CA0F6F52CBDD1C577C0101B22DA4F
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-03-01T07:57:34Z"
+  name: channel-oepay
+  namespace: pay
+  resourceVersion: "11725232"
+  uid: e53f5096-18e6-4d0c-a9fc-4b764867afca

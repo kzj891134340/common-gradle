@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "4"
+    field.cattle.io/publicEndpoints: '[{"addresses":["10.190.0.4"],"port":32000,"protocol":"TCP","serviceName":"database:mysql-nodeport","allNodes":true}]'
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xV34/bNgz+Vw4E9mY7dnzOD70V7doN6LXZJd2wXoqCkZhEqyx5kpxeEOR/H+RfyW13wB76lFD+RPEj+ZEnwEr+TtZJo4EBVpUbHTKI4JvUAhi8oUqZY0naQwQleRToEdgJUGvj0UujXTDFgEu+1Ruymjy5RJqRpYPsnAe3W0lKJBy9VxQ+V/VGSf6zFpWR2jtg8HBaAwphyTlya2APa8jSJJunSZrcruFLtIbKWL8Glo/TNA2mNd5wo9bA1rB6vVhDtAZH9gARmM1fxL0jn1hprt6VgVxa5Ol2Mi1inOfz+DbfzuLNRGCcEqV8upnO5tMtnCPglhqmK1mS81hWwGCcjvM4y+KsWGW3rJiwLPsMEexIk23AwIoIFG5INQl6KZA9uj0w4PN0lqXjyTbNpnyST2dzzDdpwbMpiQnNELfbmeBZDhF8N/abMiiS2pG98tSfO1LEvbFdOZNLaeJQvA06isuj+1sFahpLAgat3ZquQh7OenCAuYp4YFFZswuVeUMolNS0JG60cMAmaRqBpUpJjg5YFoy28L9I5409vpel9MCyNIJLgCco0fP9+yFLP5BbiNpb9LQ7Bs/WKCX17lMl0FP78uOytrvAdFz8FLobHz9pPKBUuFH98TkCf6yCdf/EQTinslK9sytlPNMtulbquhl+MM2uOLjdSi19oBua1miPUpN1wB5OQPrQ/HYFv/tz+dv7r/cfP66+Ll4tl398vH8DERxQ1eErilLqbJwnCZy/RCBL3A1dwopkmtyOoTte1EotjJL8CAx+3X4wfmHJtfPiX80VZNsGM8S2MNYDy/N0MqD33lcB3IkaWJB0E4YlZ2rLybUEPdlS6ibVd+RciAV90NJI0GF09TVWZgfP4vu430pFgb5RdUl3ptZdnGX423s9oB0puRldawVYuBRPb3lewflLiFJoN/h9rWrnyb6V1jX5MII+tLcqa0QQsw0tYv1w45X6jkcHETi+J1Erst0FQVuslY+H84AhXlvpj6+N9vTo/5OWdxY5LchKIwah5mnPs6W4N65jeIKqzx96HPWNNvDtdHA1NZ5QbwWHvm46fNDR/fVMCDHIbmc8nECh8yuL2sleLy8P1oBttfc8bs6K2edmRzWlDYJtX16Sv1m3PRgXs2LC+XQy4Wu42aO7cTXn5Ny2Vup40w83EklTGXTN2vpA3y+uXg3z4cIWVramS4IWnRupd3COXmZ5G6dZPJ6vspwVOUuLl1g+h7uwvCzohlAptSzr8qbLv1TSH5+wuWsBfVn+B58LJLS32YTNSuLd00VnCcXx/un8vzLqhpO4ApzP/wQAAP//CRx5NnsIAAA
+    objectset.rio.cattle.io/id: 0530f675-a939-43f8-b6da-0ee0c7b7897f
+  creationTimestamp: "2024-01-29T19:44:40Z"
+  generation: 6
+  labels:
+    objectset.rio.cattle.io/hash: c9081026f017c63789a3b05c17ed6e8aaff8dc13
+    workload.user.cattle.io/workloadselector: apps.deployment-database-mysql
+  name: mysql
+  namespace: database
+  resourceVersion: "16973494"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-database-mysql
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-01-29T22:48:56Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-database-mysql
+    spec:
+      affinity: {}
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: admin123..
+        image: mysql:5.7.42
+        imagePullPolicy: IfNotPresent
+        name: mysql
+        ports:
+        - containerPort: 3306
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: vol-74c3p
+      dnsPolicy: ClusterFirst
+      nodeName: prod9
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/database/mysql
+          type: ""
+        name: vol-74c3p
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T19:44:40Z"
+    lastUpdateTime: "2024-03-04T09:47:36Z"
+    message: ReplicaSet "mysql-55bcb99c4b" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T10:56:58Z"
+    lastUpdateTime: "2024-03-15T10:56:58Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

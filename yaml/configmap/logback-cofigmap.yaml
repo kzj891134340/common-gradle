@@ -1,0 +1,98 @@
+apiVersion: v1
+data:
+  logback.xml: |-
+    <configuration>
+        <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+        <property scope="context" name="logHome" value="${LOG_FOLDER}"/>
+        <property scope="context" name="logName" value="${APP_NAME}"/>
+        <!--获取配置中的参数信息-->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>
+                    [%X{logId}] %clr(%d){cyan} %thread [%clr(%-5level){lightgreen}] [%logger{0}] - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+        <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--日志名称，如果没有File 属性，那么只会使用FileNamePattern的文件路径规则 如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天的日志改名为今天的日期。即，<File> 的日志都是当天的。 -->
+            <File>${logHome}/${logName}.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+                <fileNamePattern>${logHome}/${logName}-%d{yyyy-MM-dd}-%i.gz</fileNamePattern>
+                <!--只保留最近30天的日志-->
+                <maxHistory>0</maxHistory>
+                <maxFileSize>30mb</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>[%X{logId}] %d [%-5level] [%logger{0}] - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--日志名称，如果没有File 属性，那么只会使用FileNamePattern的文件路径规则 如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天的日志改名为今天的日期。即，<File> 的日志都是当天的。 -->
+            <File>${logHome}/${logName}-error.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+                <fileNamePattern>${logHome}/${logName}-error-%d{yyyy-MM-dd}-%i.gz</fileNamePattern>
+                <!--只保留最近30天的日志-->
+                <maxHistory>0</maxHistory>
+                <maxFileSize>30mb</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>[%X{logId}] %d [%-5level] [%logger{0}] - %msg%n</pattern>
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>ERROR</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </appender>
+
+        <appender name="ASYNC_INFO" class="ch.qos.logback.classic.AsyncAppender">
+            <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、INFO、INFO级别的日志 -->
+            <discardingThreshold>0</discardingThreshold>
+            <queueSize>256</queueSize>
+            <appender-ref ref="FILE_INFO"/>
+        </appender>
+
+        <appender name="ASYNC_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+            <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、INFO、INFO级别的日志 -->
+            <discardingThreshold>0</discardingThreshold>
+            <queueSize>256</queueSize>
+            <appender-ref ref="FILE_ERROR"/>
+        </appender>
+        <logger name="org.springframework" level="ERROR" additivity="false">
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_ERROR"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="io.kubernetes.client" level="OFF" additivity="false">
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_ERROR"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="com.whalespay" level="DEBUG" additivity="false">
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_ERROR"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_ERROR"/>
+        </root>
+    </configuration>
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRQY+bMBCF/wp6Z6A2EAKWeqrUWy9VmkptehjsIesu2BY4q64i/nsF2d2oUtvjvDd632jeFRTskafZegeFJ4kUhiJBXTH4c0f6Mf81DlA4XYQotfaut+fLRNF6t0l8ckmSJG/20y3s82Xg5D5+9ZN5f4IephNe5IglxaN1BgoftthPFJBi5EivJ5BzPm6seR1995N1nDnmk/W5phgHzq1/Z9cM5rbWba2zomr6rJKtyZpOtFnRleWe901dyXZF6om3xIMdeY40BigUoigzKTO5O8hK7WpVFN+QYqCOh/+SH2h+gEJT1HWljaZWSLNrtWm4FJ3WJYumLsXeNHtJUsiVP5KjM5uPlgczQ33/WwX9Zh6eA0Phtnm860e5ntSr1y/lUNclRa/+aOy6LG+0CQp0ZheRwge+1QeFL8FQZKSIduR//WH5kcLR5r8AcBPmQHpVAz1jWX4HAAD//7M9ubdLAgAA
+    objectset.rio.cattle.io/id: ee96c96c-248f-419d-8b09-2b337e786419
+  creationTimestamp: "2024-01-29T19:50:12Z"
+  labels:
+    objectset.rio.cattle.io/hash: 82664cdca901d59cd8e30bcc3e086307d871a101
+  name: logback
+  namespace: pay
+  resourceVersion: "7494"

@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    thunes:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      pay:
+        url: https://api.limonetikqualif.com
+        apiKey: ZHhSN3FQdjdldGJoOkJBRUJCM0VDMThCOUFBQTVBQjEyMkU2RUM4MzVCODhE
+      transfer:
+        url: https://api-mt.thunes.com
+        apiKey: d0278da9-e8cf-4961-9e7e-36f6a71a98de
+        apiSecret: e9f88a49-f4c3-4364-a3e4-26e24dc1e327
+        callbackKey: 7222bbec-03eb-4364-806b-e8bb719289fa
+        callbackSecret: 97eaf3ee-0bef-40b4-a95a-f5303d4f30ef
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3ySS6/TMBCF/0p11nnUefQ2s0ViB2LR2wWPxcSeNIbEsWIDiqr8d5RUXBbAXfp8o/msY9/B3l5lDnZyIPxQSGA4MmgjfrCao51ctvA4gBD7704CfXaHg+fl/RRttzzPAx36GD3lOXub/ex5kOB5yZzELckfyQdecoc1wTfrDAhvJtfZ2zv2SDBK5Betc1PcrWE7Tu1X0TFIzGY7ZZpjHCSzU263Ha3RTcnmlOqu1Wmlzpw2ShdppQy30rXn8slsSj3LvvFiRwmRRw9CcSzKVKlU1RdVUV1Tcf6IBAO3Mrxq7jn0IOiaG5GybIrqJGdT1kVXc3nkhp+aUymqYcNHqdTmH9nxTcxbK4MJoE//qr3b4WXxAsJj8vonv6rtSh39bikD3dcEHf39Svd1fVHOIPBNXESCycu8z4Hw7A1HQYJoR/lfGeuXBI53rnt2Tob08QHwyINnvUHPC9b1VwAAAP//H35ocUsCAAA
+    objectset.rio.cattle.io/id: bdc93ad6-cfbc-418a-91c2-41dabefb837d
+  creationTimestamp: "2024-01-29T19:49:09Z"
+  labels:
+    objectset.rio.cattle.io/hash: c5a9ee339246e8d352f5a30a9a7963e19ada0e41
+  name: channel-thunes
+  namespace: pay
+  resourceVersion: "7132"

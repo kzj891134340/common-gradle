@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xWQW/bOBP9K8EA302SJVtWbN7yNW23QJMYsbsLNAoCihzZ3FCklqTcGob/+4KSLDvderGH3jTDx+G8meGj9kBr8TsaK7QCArSu7WibQACvQnEgcIu11LsKlYMAKnSUU0eB7IEqpR11QivrTT7gotemQKPQoY2EHhncij74BAIoBUoeMeqcRL9cN4UU7L3itRbKWSDwtM+Bcm7QWrQ5kKcckjhK5nEUR2kOz0EOtTYuBzKJ4zTxptFOMy1zIDms3i1yCHKwaLYQgC7+ROYsusgIfXau8OSS2XjOr/k4LKdZEqZxUobz2TwJEZMyK3nKZhmFQwDMYMt0JSq0jlY1EBjH40mYJGEyXSUpSTMyjb9CAGtUaFowkCQJQNICZVuhS5lsqN0AAZ5Or1NeYpZNZpix64QWU5bxWZEWLGY4jumknE5nMwjgmzavUlMeNRbNWaSj36JE5rTp+xmdehP67hXUYlhptdaem6IVAoHO7kxbU+Z9R7CH2RqZZ1EbvfatuUXKpVC4RKYVt0CyOA7AYC0FoxZI4o2u878J67TZfRaVcECSOIBTgnuoqGObz0OVfiE3n7Uz1OF65yMbLaVQ6y81pw67k78vG7P2TMfT//nxpt+/KLqlQtJCHt2HANyu9tbjmwDej1Utj8EuX40TCXdhfjIynZDp7OuFWVONlOeT9Itr1HeWlqVQwrW1qjW/OZmHoHUoJ86dPletHBUKjQXytAdq1v4DwvAVdx+ERAhg5E8c8WLUHugXym4hDP2wLNHrirFx6ymE4i+ifqFSwnMAqLZt3H5E7x7uPz68fLr/tLr9/8vjw8Pq5cvy/eP9zd17CGBLZeNBlFdCwSH4l12Lm+Xyj4fH27NdbXIR0xUcngMQFV0PXpJGaZRB7100Ui60FGwHBD6V99otDNpOHX+4SV6kuroMZVpo44CMr+PkeoBvnKs9utcwIF7B2jQMWt0YhrZrgUNTCdXOxh1a65OhzivHiON2dLYaSr2Gn+KPife92WrZVHinG9UnWvnPIWrXuBOxrZZh89drMoXDs8+PKztEfCcb69B8EMa2pdAc77tdtdHcC7/x02zcsONGfqM7CwFYtkHeSDT9Bo4lbaQLB7/HIGuMcLt3Wjn87v5RkI+GMlygEZoPgjSJjww7chtte257qN9w7O9EN6Id5f7KnwnkG/adtlDXtPdxkIzHc/nzaYheBJ72IKl1K0OVFcfbffkR8dhOZn6Cy8g0JXHytX2P2756bepOXqK7yrsJDLP0ep7N5vN5msPVhtor2zCG1paNlLuro44jj9rmUNs+0ff47RTqZpDCE1tYmQZPBVr0YYRat5fuEss0jJNwPF8lEy91cXaJ5c9wJ5ann5GWUCWUqJrqqq+/kMLt3rC56wDHtvwHPieIn3Bd+L8I5B9/eNQNUr57fPvWnRlNS4qfAQ6HvwMAAP//vJYkDWgJAAA
+    objectset.rio.cattle.io/id: 1829d7d2-f561-401f-9891-ee1f6fd4c86a
+  creationTimestamp: "2024-03-22T07:25:40Z"
+  generation: 4
+  labels:
+    objectset.rio.cattle.io/hash: d4574dfe6638e6c71ab5c6d8b4bc0ce20a3f5588
+    workload.user.cattle.io/workloadselector: apps.deployment-database-mongo-1
+  name: mongo-1
+  namespace: database
+  resourceVersion: "24786345"
+  uid: d37421eb-cc33-4ab6-936a-7f61ea652e85
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-database-mongo-1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-04T09:43:19Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-database-mongo-1
+    spec:
+      affinity:
+        podAffinity: {}
+        podAntiAffinity: {}
+      containers:
+      - args:
+        - --keyFile
+        - /data/db/mongo-keyfile
+        - --replSet
+        - rs0
+        - --bind_ip_all
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: admin
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: mongo.com
+        image: mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        name: mongo-1
+        ports:
+        - containerPort: 27017
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data/db
+          name: vol-uqk15
+      dnsPolicy: ClusterFirst
+      nodeName: prod11.asia-northeast1-a.c.upbeat-arch-379107.internal
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/database/mongo-1/db
+          type: ""
+        name: vol-uqk15
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-03-22T07:25:41Z"
+    lastUpdateTime: "2024-03-22T07:26:29Z"
+    message: ReplicaSet "mongo-1-7b74db4f76" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-04-03T12:52:21Z"
+    lastUpdateTime: "2024-04-03T12:52:21Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 4
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

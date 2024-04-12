@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "15"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xVwW7bOBD9lWCAvUm2KNuqzVuQot1DUxiJu4e0PYyoscwNRQok5UQw/O8LSrZkZzeLHnoz6afhe49vhgfAWv5F1kmjgQPWtZvuGUTwLHUBHD5SrUxbkfYQQUUeC/QI/ACotfHopdEuLIsBN3lucrKaPLmJNFNLe3kqzlKIwOR/k/CO/MRKMxHovaKAk+G0FcMVJQuME5an8TxJl/FqTlmcbdlWzIjmTCzhGIGw1B29kRU5j1UNHNIkncWMxWyxYQvOZjxNnyCCkjTZDgycpREozEl1lN9jskO3Aw4JY1mSYb5KVvmcLRZpmi/z5TxdZkua0WqxzBYzXMwLiODF2GdlsJg0juxFpfO+I0XCG3syeDKaFdfYxla656BKY0XAoVv2K1ejCFs1tgHgahKBeW1Nacm5j4SFkpoeSRhdOOBZkkRgqVZSoAPOwqK3/0/pvLHtF1lJD5wlEYykDlChF7svgzO/RU/g6y16KttQ0xqlpC6/1QV66s98fWxsGeSliz9CuvD1m8Y9SoW5Om8fI/BtHVYPVwXCPlW1Ohd7P5kjfX+dlnmcsDjNNmzGWcpn7OmdZOlGqcvc/DZ3TreJ263U0geXAgGjPUpN1gH/fgBZYWcRSyZsvpwkEzbjq9VqNX3ZoQr5aKehIGfhr/h56SDqv1k3Sq2NkqIFDrfqBVsHbyNWG+v7Y4ZT18Z64MtkgO68rwPUGm+EUcBhc7eG488QLWcaK8j1xD3ZSurOvHtyLlBAHxppWtB+evFvrEwJ/4k/0/0kFUEEe6Oaiu5No08sq/DzXBXrLubh+6kyZSn1qG9vVJzK/baCY/TmM2VKdw1c1I3aw/Fn0FRoN7C4U43zZD9J68LwsyEP1v/bUyd2VDSK7Ne+ZkFbbJSPh/2AIdFY6ds7oz29+t4xR3YvBd0KEQiOX8Lbv64LX3v32aKgNVlpimEMzJKzecPtbmV5j3U/qbsq96Yg4PN0vGllyhzF5SS6tnFn3MnFA9Tnq0WPnaXTU6ROzfqmyGBxPxXQN10nDc3+cDmyggh5at/vB1Do/MaidvLcl+8P+4DtB8SIu27zefLUPWRd4MJU6U9+JH/zo2uLeJFl2YdsuZ1nP+Bmh+7GNUKQc9tGqfbmPHqpmHSZQNc9bV/pZax0O8ywUSxsbEOjP+tTGanLztv3RPbkVxvGePqBz2b/L/IaN4ocH/FOUCW1rJrq5mS/VNK3V2rue8D5Vn5BzwgJXWTykF8qPr95ey1h0T5cP08Xi6YTVVwAjsd/AgAA//9pTLzwoAgAAA
+    objectset.rio.cattle.io/id: 91a9e05a-01b2-4028-94e6-6f1fc3ee41c8
+  creationTimestamp: "2024-01-29T19:45:42Z"
+  generation: 17
+  labels:
+    objectset.rio.cattle.io/hash: 011606ab909b415522b8b842868e3e958653a54d
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-risk
+  name: risk
+  namespace: pay
+  resourceVersion: "24786374"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-risk
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-25T07:28:21Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-risk
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/risk:1.0.1-k8s
+        imagePullPolicy: Always
+        name: risk
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-2ivfm
+        - mountPath: /logs
+          name: vol-5pulv
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-2ivfm
+      - hostPath:
+          path: /data/logs/risk
+          type: ""
+        name: vol-5pulv
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:04Z"
+    lastUpdateTime: "2024-03-25T07:28:31Z"
+    message: ReplicaSet "risk-944b95787" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-04-03T12:52:22Z"
+    lastUpdateTime: "2024-04-03T12:52:22Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 17
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

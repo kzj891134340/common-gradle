@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    globalpay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      payBaseApi: https://cevtw.glkdc.com
+      proxyPayBaseApi: https://srbtm.glkdc.com
+      merNo: 861100000050091
+      privatekey: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAN37RoB0eV8JG4ZuGzDmXjks3t2/ug2zmVFzUqxdTajOGmmPE0FLJFTMFRmIcZfjJhAhyQJQ/HqoDvkdOTs1zQi/u4NZa51bAgM75RUZrxCtg924zDuOhKa5ecs/NEtoPrq7F8Umim337OB9xVg8NSxQrIFMjPfF2IBwQFKgHp/jAgMBAAECgYEAmpklCdOUsA58wAwxHcZjOvi4IsIjxuUdU2+41ViJ/JXGKVw+8ctueyxDSawQSNMnMDcHcniKzrX6755dvJIEv9VKn+WaOn5X61a2p2Li1kEOmy8m4A+REaifthV4cR/bnC2Q/8VXEmccdl/BBLAWd9S00a6EUyx3pTQgshZLW5kCQQD/XxIIJyv57fNGCsUKLD6JeS3nOiLM2wxUtxpImva47Zn8qipNYMuPVpZnN1Kkw5m6SIoqSRckDI6fZsVgEcIdAkEA3ocp1SxTIjaWAX8gC/QtroXApt74D4W74SkRwJygGp0cAOQK+fgVI9jXDp8un+O45ls5ih3c9Z7RhwztOiRJ/wJAc5yw5ywExsOpTV520iIxtb88vuAc/S12KawzpAc0B4jaG/9V424c+imzMctkCN/c6u8IThiE93cP4q5+UP35KQJAOHaJWcq+aV76XvTXt9DESpUrlevbe2zOiEo4c+wJ/9a/hUZXtqeJDah2oQIo/W71upWJGw+KwlQDDEZuZyNQFwJBAPa59AerT9hXx87jSVDSWHXrI8XXH/HZHHBfhw8EP9daggh2wuvCfxdS3/oQBIgCjUNICSetecxDz9cQVpndJoU=
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+TM+DPWRkmByBF9rVE1LH42RgHGD9z2vcZGIYve7Jm8vXyIDD09UP9aArULeM4tlinkEN/zkj6I+E/NBncVZukqYiyJ4W4cOH2+rZof+kWhLqfCCHHmOiAbqYzJPzn6vLng7DjixVeiCruaej9nx9OKXBesad3BO5NvGI5Y6bUQIDAQAB
+      md5Key: FF2CA0F6F52CBDD1C577C0101B22DA4F
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3ySPQ+bMBCG/0p0MxBshwC3VurWqkOSoR/DYY7g1tgWWK1QxH+vTNR06Mfo9zndY732AyiYG8+L8Q4QvgvIoKdIgIkEazRF412x0mQB4W59RzbQip/d4RBofe+jGdbrbPEwxhjweKRgih8jWV4CrYXjmJLjM/lAsGXwzbgeEN54N5j7OwqQwcSRXlrnfNytSzr67ivruHAsZuMLTTFaLow/mrSDBTckW5Hrgdr8pPo2b6pW5vVJ1aI8S3WWnJR65n3jxUy8RJoCIMhSqlyIXLaXssWqwkp9hAwsdWz/ax5pGQHhpFTbNW2jyoF0dx6or4Wsayl6qk66rMqSVUd1k/wTObpz/9aw7RfAT3+rfdjhZQ0MCM/J2+/8JtKVBvzVUgH42DIY8M9XemzbSzkDAt3ZRcjAB573OUC4hp4iQwbRTPyvMrYvGTjauR7JObb56wPAEy2BdOIp2bafAQAA//8/IXFgTgIAAA
+    objectset.rio.cattle.io/id: e1e8a291-cfa9-43d9-8592-74371062362e
+  creationTimestamp: "2024-01-29T19:48:49Z"
+  labels:
+    objectset.rio.cattle.io/hash: 4339b89830facb6fad7127721da54c0500e3ba78
+  name: channel-globalpay
+  namespace: pay
+  resourceVersion: "8780337"
+  uid: 765fb1e3-4047-444a-8a27-e449e905b1e0

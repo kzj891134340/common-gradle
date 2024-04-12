@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "24"
+  creationTimestamp: "2024-01-30T12:23:24Z"
+  generation: 26
+  labels:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-settle
+  name: settle
+  namespace: pay
+  resourceVersion: "24786280"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-settle
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-25T07:28:31Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-settle
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/settle:1.0.4-k8s
+        imagePullPolicy: Always
+        name: settle
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-koccq
+        - mountPath: /logs
+          name: vol-hwx8b
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-koccq
+      - hostPath:
+          path: /data/logs/settle
+          type: ""
+        name: vol-hwx8b
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-30T12:23:24Z"
+    lastUpdateTime: "2024-03-25T07:28:41Z"
+    message: ReplicaSet "settle-57cc9c8b77" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-04-03T12:52:17Z"
+    lastUpdateTime: "2024-04-03T12:52:17Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 26
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

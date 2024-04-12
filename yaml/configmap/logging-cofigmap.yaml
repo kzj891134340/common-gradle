@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    logging:
+      config: /application/loggin/logback.xml
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRz86bMBDEXyWaM5DPgKH4Wqm33tIc+uew2GviBmwLrKpRxLtXkDat1PY7IWZm92fN3kHRnXleXPBQ+CaQwVAiqM2Jo9OUXPDFjaYRCmMYBucH9dkfDjp46wZ1OP6ROz4C26cnfS2+TyPWDFfnDRTe7hPvKSLDxImeIO9D2ueX7Tf0X1mnhVMxu1BoSmnkwoWj23a0bLWtWeZSlDav267OqTEyLztRVr3shbG0IfXM+8aTm3hJNEUolC9llQuRC3kStZKNquRHZBip5/FV8oWWCxTeiFYL0TTti6isbEjXtRXG9KKXsrNacld1XSv0xp/I08DmnePRLFCf/lW03c3TLTIUHsnzb/0stidZ9aulAuq+ZrDq77vc1/WJnKFAA/uEDCHyvOeg8CEaSowMyU38vzLWLxk87f7PU+MhLJH0pka6YV1/BAAA//8KM6yRNgIAAA
+    objectset.rio.cattle.io/id: 7efcf4e5-512f-4794-a6d5-29123b5b1dfa
+  creationTimestamp: "2024-01-29T19:50:20Z"
+  labels:
+    objectset.rio.cattle.io/hash: 817c11667013f56ac44f1ddb1b559fc5e939971c
+  name: logging
+  namespace: pay
+  resourceVersion: "7583"

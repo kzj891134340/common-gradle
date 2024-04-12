@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    coverpay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      proxyBaseApi: https://apis2-id.coverpay.cc
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3ySS6+bMBCF/0p01kBiwtPbSt216iI3iz4Wgz0ObsG2wLoVivjvFUQ3XfSx9PlG81nHvoOCvfI0W+8g8SqQQFMkyI2EwSqK1rtsoXGAhPKvPAVa5Fd3OARaPvpozfIyDfLQxxjk8UjBZj97GngOtGSO45YcH8knWrAm+GGdhsQ774y9faCABCNHemqd83G3ztvRd99ZxZljNlmfKYpx4Mz6o912iLphVXWc6rLN0+LcNmljKkp1VYtSV50y9XlTqon3jRc78hxpDJDIT/k5FSIV5UUUsiykqD4jwUAdD/819zT3kDgrXZiuKNrGlDlXSufdqRVd3gilq5Op67YtqSp3/0iObqzfWx70DPnlb7WbHV6WwJB4TF5/51exXcnIt5YyyPuawMg/X+m+rk/lBAm6sYtI4ANP+xwkXoKmyEgQ7cj/KmP9lsDRzlVPzvGQvn0APMgcSG14S9b1VwAAAP//iPE9Xk0CAAA
+    objectset.rio.cattle.io/id: 178ec6be-d592-4398-8f6a-d6715d6bcf73
+  creationTimestamp: "2024-01-29T19:48:13Z"
+  labels:
+    objectset.rio.cattle.io/hash: 3cd4fb4498f52e6cd2b091b281cd60f77995a653
+  name: channel-coverpay
+  namespace: pay
+  resourceVersion: "6873"
+  uid: 98e825ac-f1bf-40d4-a350-49d338aea48f

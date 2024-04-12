@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  application.yaml: "spring:  \n  rabbitmq:\n    host: rabbitmq.database\n    port:
+    5672\n    username: admin\n    password: rabbitmq.com\n    virtual-host: /\n    publisher-confirm-type:
+    CORRELATED\n    publisher-returns: true\n    template:\n      mandatory: true\n
+    \   listener:\n      simple:\n        acknowledge-mode: manual\n        concurrency:
+    1\n        max-concurrency: 1\n        retry:\n          enabled: true\n          max-attempts:
+    5\n          max-interval: 10000\n          initial-interval: 2000\n          multiplier:
+    2"
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRz87TMBDEXyXacxKc0DjNXpG4cSs98OewtjetIbGNbYGqKu+OnOorB+A77sxqf6uZO1CwZ47JegcIPzuowVAmwOKExWrK1rv2RusCCClE6y5YVV9cVUVSyub1B5ahqq4+ZXyK7WqNWfgXRX7YwceM1SBhq+G7dQYQ3nk328sHClDDypmeYOd83rmpjF59Y50T5zZa32rKeeHW+je23DhOY6/kKBophq45DHJq1FHJ5iD1rPlIB0V9QerI+8WTXTllWgMg9KJ/23Rd0w2n7oDDiGL4BDUspHh5lXyldAUEmtUoOhqkZKbJ9ErIkTtlJsFyNlqLUYhhHqbCX8nRhc17y4tJgJ//Ffy8m6dbYEB4bJ7/6OeuvDTjS0ot4H2rYca/e7pv2xMZy6MXdhlq8IHjvgcIH4OhzFBDtiv/L4ztaw2Odv+lWHgoKZAucqAbbNvvAAAA///sIOz+RwIAAA
+    objectset.rio.cattle.io/id: 8972b670-6051-4569-b8b6-46cfce8a4ba2
+  creationTimestamp: "2024-01-29T19:50:56Z"
+  labels:
+    objectset.rio.cattle.io/hash: afb701a566eea9d2b067e1bd90e6fdcc07005f59
+  name: rabbitmq
+  namespace: pay
+  resourceVersion: "38547"

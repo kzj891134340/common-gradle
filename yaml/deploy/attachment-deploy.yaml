@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "3"
+    field.cattle.io/publicEndpoints: '[{"addresses":["10.190.0.4"],"port":80,"protocol":"HTTP","serviceName":"assets-server:attachment","ingressName":"assets-server:attachment","hostname":"console.whalespay.net","path":"/attachment(/|$)(.*)","allNodes":true}]'
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/7RWTY/bOAz9KwMCe7MTfyaxb0W7bQ9tEbTpHjrugZboRDuyZEhy2iDIf1/IzoennQB76S2iSYrvkY/KEbAT/5CxQisoAbvOzvcxBPAkFIcS3lAn9aEl5SCAlhxydAjlEVAp7dAJraw/8qvf7KmvyShyZGdCzw3txTl5BgE0giSfMXROkv/c9bUU7G/FOy2Us1DC47EC5NyQtWQrKB8riKNZXESzaJZV8D2ooNPGVVCuIv/baKeZlhWUFbzfbNYVBBVYMnvBIABd/0vMWXIzI/TkXuHBpcmi4LxYhQssojBjuAhrSnlYLJZ53XC2bFYxnAJghgakG9GSddh2UEISJWkYx2Gcb+K8jFZlUnyDALakyAzOUMZZABJrkgND9yrZod1BCcVqkXEq6jSKeNJE8TKLFknD4pytUs6iOI8pXRLlEMAPbZ6kRj7rLZlJpovdkiTmtDn3c3brTYjWkrOhp4dMiM4h2w3NPQWgsCUfcjOONtshGz5MYyGAfuBwibQoMlqGmKVpmKVpHiJlPGRpzVleLOsmynx22xHzNHRGb31v3xByKRR9IaYVt1AuoigAQ50UDC2UsT+Mo/NeWKfN4YNohYMyjgK4ITxCi47tPlxp/iPk+PqdQUfbg7/DaCmF2n7tODoaa/j5pTdbz1KS/+WVgj+/KtyjkFjLi/kUgDt0/vT5WQJvp7aTl2T3VXaD414YxWS1idIyycs4/3ZnbFUv5XQo/xhb525j0wglnGfNF6SVQ6HIWCgfjyBaHCh7Okih2A7V/JaljGfRLIJgdFr3Uq61FOwAJbySP/Bg4eWB9athzH69bK2NG5bFywHn/QElbF6v4fTdz53VvWFkx6odmVaogcmPZK0vB52X7JzTfj75Gkq9hRf9L6W/FZIggL2WfUsfda/Otbb+5yUrdoMGfPy8EZImUPdahnmfNjWcvvtKubLX3K9lbx2Zt8LYQbma06cxqjOapzDgcmjc70RatiPeSzLnAE4N9tKFV7v3IdYb4Q6vtXL00/1GzTuDjNZkhOZXSafRBesIc6ftGeURuguH6HDeGe2X46T/V+RnxUwW1DMSRmmi64dxviru83SP+GrEWUOPR5Bo3cagsuIijvvr3PuOKv3F76q1JPo2vIxDo720x5u/kHuoJpMWLjO+WPKCNcsKHnZoH2zPGFnb9FIeHi5bkfhsaBTa4cX8RD9u+V5d18kNMmxMTzeW1uc0Qm3hFNyHmoVRHCbFJo7KvCiT1T2oL/ndoN7+GwyAWqFE27cP5yYIKdzhGZqPo8OlN/8Dz83FT7uuh2XD3/3yxhpCfvj8/OWYHPoBFJ84nE7/BQAA//8PuVFS9wgAAA
+    objectset.rio.cattle.io/id: 3269dd98-6a90-4ca6-be3d-9675bfdc7f81
+  creationTimestamp: "2024-01-29T19:38:00Z"
+  generation: 3
+  labels:
+    objectset.rio.cattle.io/hash: 9864de9b300d2f0174062fc15c83dc0151e37ee5
+    workload.user.cattle.io/workloadselector: apps.deployment-assets-server-attachment
+  name: attachment
+  namespace: assets-server
+  resourceVersion: "16974683"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-assets-server-attachment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-01-29T21:37:23Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-assets-server-attachment
+    spec:
+      affinity: {}
+      containers:
+      - image: kylinchan/attachment:1.0.0
+        imagePullPolicy: Always
+        name: attachment
+        ports:
+        - containerPort: 80
+          name: attachment
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/files
+          name: vol-5u3fb
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/project/attachment/files
+          type: ""
+        name: vol-5u3fb
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T19:38:00Z"
+    lastUpdateTime: "2024-01-29T21:37:32Z"
+    message: ReplicaSet "attachment-5c5cc5f66c" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:01:25Z"
+    lastUpdateTime: "2024-03-15T11:01:25Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 3
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

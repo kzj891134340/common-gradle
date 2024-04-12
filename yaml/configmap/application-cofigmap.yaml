@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    spring:
+      data:
+        mongodb:
+          uri: mongodb://pay:pay.com@34.131.41.26:30041/pay?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256&3t.uriVersion=3&3t.connection.name=ceshi&3t.alwaysShowAuthDB=true&3t.alwaysShowDBFromUserRole=true
+      redis:
+        database: 0
+        host: 34.131.41.26
+        port: 30042
+        jedis:
+          pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1ms
+            min-idle: 1
+        timeout: 5000ms
+    #  rabbitmq:
+    #    host: 34.131.131.96
+    #    port: 30004
+    #    username: admin
+    #    password: admin123..
+    #
+    #ribbon:
+    #  ReadTimeout: 5000 # 请求连接的超时时间
+    #  ConnectionTimeout: 10000 # 请求处理的超时时间
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRzY6cMBCEXwXVGRgbzDDrU6RIueU2mUN+Do3dsE7AtsCJhEa8ewSbTCLl5+auKvVnVd9B0d14Xlzw0PgmkcNSIujdiaMzlFzw5UrTCI0lzs4P+qPPsj11PLJsCn4ItvsxZdnX2emHeDpFWnWktTRhelUrbDm+OG+h8Tr43g1vKSLHxIkeYO9DOrjLPobuM5u0cCpnF0pDKY1cunBy+46ns2qkFH2hnrgrlFVNQXXVFuJMhi+tkrYTO9LMfGy8uomXRFOERiWqupCykM1VKt3UWqn3yDFSx+N/yc+0PEOjPZtKiL6SlWwNt1UtxNmIpqILXzqramW73l6a886fyNPA9o3j0S7QH/5WfH+Y1zUyNF6St1/6Te5f6vXPlkro+5aj13/e6b5tD+QMDRrYJ+QIkecjB4130VJi5Ehu4n+VsX3K4enwf6PgRVwimd2JtGLbvgcAAP//fR/HPUoCAAA
+    objectset.rio.cattle.io/id: 9645110f-49eb-4d45-a327-06ace8741db0
+  creationTimestamp: "2024-01-29T19:47:28Z"
+  labels:
+    objectset.rio.cattle.io/hash: 76c200f21217ce723006c052a8e8bd434dbfd856
+  name: application
+  namespace: pay
+  resourceVersion: "6604"

@@ -1,0 +1,37 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    ppro:
+      channel: livechannel
+      payFrontUrl: http://api.whalespay.net/api/whalesPay/forntNotify
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/notify
+      # 渠道请求参数
+      proxyBaseApi: https://api.girogate.de
+      login: kuaishoulive
+      password: OWsv2z51LKdIhASN
+      sharedSecret: e2mfzyE7S2SEM115
+      notificationSecret: HpglGNXYz79ASH5H
+      keyPath: /data/key/client.p12
+      keyPassword: 123456
+      certPath: /data/key/keystore.p12
+      certPassword: 123456
+      # SFTP连接参数
+      remoteHost: sftp.girogate.de
+      port: 22
+      processingUsername: sftp020686
+      settlementUsername: settle030686
+      sftpPrivatePath: /data/key/kuaishou_rsa_2048
+      sftpPassword: changhong123..
+      remoteFilesPath: /
+      localFilesPath: /data/report/ppro
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3ySvY7bMBCEX8WYWpItWfRJ2wa4Lp3PRX6KFbmymFAkIREXGIbePZDu4hT5KXdmsR8xwzs42otMsw0ehNcSGQwnBq1OdFZzssEXNx4dCDFOgb743U4P7L042jn7Ku/Dqke+PU/Bp5fJ0W5IKdJ+z9EWPwZ2Mke+Ycnw3XoDwofge3v9yBEZRkn84Hof0oad1zF030SnWVIx2VBoTslJYcPerjfqTvqq1DrvWq3yujqe8qYr61z13PVclXw68YrUk2wXz3aUOfEYQagO1TEvy7xU57ImpejQfkIGx524/5IHngcQVKW0adTJPBmjRKmDqhrdtqK7tjHCbd0cu6Z+6lb+yJ6vYp6tODODPv8t934zz7coILxtXn7rl3J9Uk+/UipA9yVDT3/WdF+WB3ICga/iEzKEKNO2B8JLNJwEGZId5V9hLF8zeN78947z9QfgTZ0j69XaWl1+BgAA//9vZ1fZSgIAAA
+    objectset.rio.cattle.io/id: 4bef21cc-b9c5-4236-8b14-5fabfa21a66a
+  creationTimestamp: "2024-01-29T19:48:58Z"
+  labels:
+    objectset.rio.cattle.io/hash: 525cd856d7dd5e550528c99ecb98dea9483b847b
+  name: channel-ppro
+  namespace: pay
+  resourceVersion: "7080"

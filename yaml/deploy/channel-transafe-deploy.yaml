@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "18"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/7RWwW7bOBD9lWCAvUmyZEuyzVvRot1DUxiNu4e0PYyoscyEIgWSciIE/vcFJduymzroYfdmio+P8x6Hj34BbMQ/ZKzQChhg09jJLoEAHoUqgcEHaqTualIOAqjJYYkOgb0AKqUdOqGV9cPyhIse24KMIkc2EnpiaCcO5BkEoIsH4s6Si4zQEUfnJHmY8JsVaZ7TPE3DZZnMwzTLeLjI00WICeJskeXlYpnAPgBuqN95LWqyDusGGEzj6SxMkjDJ1knG4iWbZvcQQEWKTA8GlgUgsSDZF3ytkC3aLTBYbPJlPiuLIskznOVJzvOU8mlcLuOinNJyluZxkedzCOBJm0epsYxaS+aM6fjdkiTutDnYG41WhQ12Id+iUiRDZ1BZ3JAXqLAmYPBqapixDXI/3WDnwbYh7hU1RleGrP1AWEqh6I64VqUFlsdxAIYaKThaYIkfDIfyt7BOm+6zqIUDlsQBjMW+QI2Obz+fHPvPdfranUFHVef5jZZSqOpbU6KjYf/nu9ZUXuo0+8v3Hz5/U7hDIbGQx8/7AFzX+NHXCwL/nepGHsmu9+4oxb1qqGk4zdbxgqUZS2f3V5pPtVKe99b/4tThlHGzEUo475gvRiuHQpGxwL6/gKixtyuJoyRdRHGUzNhyuVxOnrYofd90k1/JWRLFURw+LiwEw/pVK+VKS8E7YPBOPmFn4a2WbLRxw/analbaOGCL+LTsHG6001xLYLB+v4L9T9+OVreGkx1EOTK1UL3Jt2StLwmdv5STknaTs9lQ6gp+iz+W/1FIv+dOy7amW92qQ6W1/3lkxaa/Gn79ROqqEmrUu9MyNFxUD7AP3lh2sOVyXfwQJx3sf3qJpbKnot7L1joyH4WxPlWNbyPjXltu+ZbKVpL5MnCWtMFWuvD03WOIt0a47r1Wjp7dYKAlsxOc3nHu6x1Xwq9Tl8SXVn4yyGlFRujylCSz+Ojl6cA3orrFZngCepZbXRKwdDoevtRVgfzxLNguXf0zljdy8sLsIVbQtf1VPKXF1/P883LE4f5/fwGJ1q09rThe7OsPiscOCXOBO8uJLL7v38q+E30sDTvfkbv58UpFOC+yIl3weZH9gJst2hvbck7Wblopu5sh0/smQds/ol/oaSR8d8rCUTOsTevHh1BcHV4Foare7Gta0zBOwulyncxYNmPx/JrW3+FGrePfhV5LLZSo2/rmcApCCtdF52puB8DxcP5Azwjx10oXvqGp/HT5zBvCsvt6+eKdDdpeU3kG2O//DQAA//9KThd0CQkAAA
+    objectset.rio.cattle.io/id: b466e744-9d17-455c-8648-a1aa3856d891
+  creationTimestamp: "2024-01-29T19:42:35Z"
+  generation: 20
+  labels:
+    objectset.rio.cattle.io/hash: 8f6963dbb165a3616c64e620d90bd2e93460b667
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-transafe
+  name: channel-transafe
+  namespace: pay
+  resourceVersion: "27343246"
+  uid: b9a741ba-e17b-4618-8298-57db890c1aa6
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-transafe
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-03-28T07:25:17Z"
+        kubesphere.io/restartedAt: "2024-04-08T06:48:25.894Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-transafe
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-transafe:1.0.0-k8s
+        imagePullPolicy: Always
+        name: channel-transafe
+        ports:
+        - containerPort: 80
+          name: transafe
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-rcigj
+        - mountPath: /application/channel
+          name: vol-0j01y
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-rcigj
+      - configMap:
+          defaultMode: 420
+          name: channel-transafe
+        name: vol-0j01y
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-04-03T12:52:20Z"
+    lastUpdateTime: "2024-04-03T12:52:20Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2024-01-29T20:37:03Z"
+    lastUpdateTime: "2024-04-08T06:48:35Z"
+    message: ReplicaSet "channel-transafe-69fbf7b666" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 20
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

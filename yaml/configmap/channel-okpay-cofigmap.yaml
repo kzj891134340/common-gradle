@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    okpay:
+      payNotifyUrl: http://api.whalespay.net/api/whalesPay/okpay/notify
+      payBaseApi: http://p.ok-pay.org/api/
+      proxyPayBaseApi: http://p.ok-pay.org/api/
+      merNo: wpppay1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-01-29T23:00:35Z"
+  name: channel-okpay
+  namespace: pay
+  resourceVersion: "63039"
+  uid: dcb3357c-139c-4a20-84e3-f39b137d3587

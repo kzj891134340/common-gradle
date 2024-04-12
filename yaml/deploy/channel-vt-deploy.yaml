@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "4"
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xVTW/bOBD9K8EAe5NsUf6SdQtStHtoCiNx95C2hxE5ltlQpJaknAiB//uCkm3Z2aTooTeRehzOe3x8fAGs5T9knTQacsC6duMdgwgepRaQwweqlWkr0h4iqMijQI+QvwBqbTx6abQLQ3HCjR6bgqwmT24kzdjSTh6KswQiMMVP4t6RH1lpRhy9VxRwMuwmZvOMk5jGy2xZxFOcZnGWJrNYpPNZkjKxoJRgHwG31G29lhU5j1UNOaRJOokZi9lszWY5S/J08gARlKTJdmDIWRKBwoJU1/J7nWzRbSGHZL7JUsYWM5GgmE9wtpwmy8lmUkwXU6Qlny+m8wXnc4jgydhHZVCMGkf2rNJx3pEi7o09CDwaxIprbGO+Ra1JxTsfuGmsCHI4m+znXI08/KixDTBXEw8samtKS859IBRKaronbrRwkM+TJAJLtZIcHeQsDPqj+Fs6b2z7WVbS96IMDb5AhZ5vP59U+oPcQtfeoqeyDZWtUUrq8mst0FO/8/N9Y8tAMp39FfyGz1817lAqLNRxeh+Bb+swursoEOapqtWx2PteHUj4S/9M44TFjK2TLGeLnLGHd7ymG6XOnfSHNTqcLG42UksftAptGO1RarIO8m8vICvshGLJiE2zUTJik3y5XC7HT1tUwSvteCibswCIHzMHUb9y1Si1MkryFnK4Vk/YOnjberWxvt/y1MHKWA95lpwW9EBrvOFGQQ7rmxXsfwTDOdNYTq6n4MlWUndi3pJzoQ304aqNBe3GZ39jZUp4E39s+aNUBBHsjGoqujWNPvRYhc9jVaw784f1Y2XKUuqB486omO/Uvz9hH/1i2UGKy3VVUT0L2P8IFIV2p6ZuVOM82Y/SuiCIDXax/v8yO74l0SiyX/qagjbYKB+f5gOGeGOlb2+M9vTsewEd2Z3kdM156HdYCa9/XRa+lPKTRU4rstKIU1ZMkqOWp6PeyPIW6z7auyq3RhDk03Q4dmXKAvnjWWhdqvp7Vd5MvwuZ++BA33SX7ZQHd+fZFojIww3/9gIKnV9b1E4er+77L0TA9hky4C6TYJI9dK9f58EQPP3O9+Svvp/1H2ezQhTTebHMvsPVFt2Vazgn5zaNUu3VMalJjDp3oOtexS/0NNS7PoXdQBnWtgnjQ+qtDmWkLjuV36PaUUiXazbJZ2k+m/+S6ivcQHV4/ztCldSyaqqrwyFIJX17wea2BxzP5jf4DJBwn0wRnEzi06tn2xKK9u7yNTsbNB0pcQbY7/8LAAD//1ypfQzbCAAA
+    objectset.rio.cattle.io/id: d568ced4-989b-4a48-8205-d265021d7e2e
+  creationTimestamp: "2024-01-29T19:42:47Z"
+  generation: 6
+  labels:
+    objectset.rio.cattle.io/hash: 06f821175d0ad63a594093f3b474ae9c67467cc6
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-vt
+  name: channel-vt
+  namespace: pay
+  resourceVersion: "16976711"
+  uid: 8337f907-fb30-4a29-8a89-89d95a436601
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-vt
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2024-02-17T13:20:24Z"
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-vt
+    spec:
+      affinity: {}
+      containers:
+      - image: 10.148.0.13:9999/whalespay/channel-vt:1.0.1-k8s
+        imagePullPolicy: Always
+        name: channel-vt
+        ports:
+        - containerPort: 80
+          name: vt
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /application/loggin
+          name: vol-cvlqj
+        - mountPath: /application/channel
+          name: vol-mbmxd
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: logback
+        name: vol-cvlqj
+      - configMap:
+          defaultMode: 420
+          name: channel-vt
+        name: vol-mbmxd
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-01-29T20:37:03Z"
+    lastUpdateTime: "2024-02-17T13:20:40Z"
+    message: ReplicaSet "channel-vt-74c8bf55db" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-03-15T11:05:57Z"
+    lastUpdateTime: "2024-03-15T11:05:57Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
