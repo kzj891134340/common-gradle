@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-yypay"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:27:45Z"
+  name: channel-yypay
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-yypay
+    uid: 15db4b65-c5d9-4836-80bf-ea9b41386652
+  resourceVersion: "37991"
+  uid: fb3f08d0-4d92-48db-9618-a3a09421324d
+spec:
+  clusterIP: 10.96.3.221
+  clusterIPs:
+  - 10.96.3.221
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-yypay
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

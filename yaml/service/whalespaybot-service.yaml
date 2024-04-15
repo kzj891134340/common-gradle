@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/whalespaybot"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-03-27T10:26:45Z"
+  name: whalespaybot
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: whalespaybot
+    uid: 33e2f480-9bfb-4f09-a57e-93b210aac431
+  resourceVersion: "21723804"
+  uid: 1be4c0c6-b1d2-45f4-a24a-4df4826a4b74
+spec:
+  clusterIP: 10.96.2.117
+  clusterIPs:
+  - 10.96.2.117
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: prot
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-whalespaybot
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-transafe"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:35:51Z"
+  name: channel-transafe
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-transafe
+    uid: b9a741ba-e17b-4618-8298-57db890c1aa6
+  resourceVersion: "40197"
+  uid: db307f58-256b-45b3-872e-6ca73ac04199
+spec:
+  clusterIP: 10.96.1.90
+  clusterIPs:
+  - 10.96.1.90
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: transafe
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-transafe
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -45,7 +45,7 @@ spec:
               topologyKey: kubernetes.io/hostname
             weight: 100
       containers:
-      - image: 10.148.0.13:9999/whalespay/channel-thunes:1.0.0-k8s
+      - image: 172.18.89.0:8083/whales/channel-thunes:1.0.0-k8s
         imagePullPolicy: Always
         name: channel-thunes
         ports:

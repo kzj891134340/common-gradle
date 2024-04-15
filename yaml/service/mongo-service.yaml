@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/mongo"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:26:14Z"
+  name: mongo
+  namespace: database
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: mongo
+    uid: 51b7ea0e-cf2b-4b5f-be93-73baa9304eae
+  resourceVersion: "37566"
+  uid: 56a2d270-ecdb-4013-a28a-dfd46861150b
+spec:
+  clusterIP: 10.96.0.226
+  clusterIPs:
+  - 10.96.0.226
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-mongo
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

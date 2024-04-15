@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-coverpay"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:04:01Z"
+  name: channel-coverpay
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-coverpay
+    uid: f447515a-fc57-4c3b-81bf-d2ee637f60f0
+  resourceVersion: "31243"
+  uid: 4b48c5ad-21c7-415b-b1b2-25ed6ef0c740
+spec:
+  clusterIP: 10.96.3.181
+  clusterIPs:
+  - 10.96.3.181
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: port1
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-coverpay
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

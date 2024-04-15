@@ -23,3 +23,16 @@ for a in $(kubectl get configmap -n assets-server |grep -v NAME |awk '{print $1}
 do
     kubectl get configmap $a -n assets-server -o yaml  > "$a-deploy.yaml"
 done
+
+for a in $(kubectl get service -n assets-server |grep -v NAME |awk '{print $1}')
+do
+    kubectl get service $a -n assets-server -o yaml  > "$a-service.yaml"
+done
+for a in $(kubectl get service -n database |grep -v NAME |awk '{print $1}')
+do
+    kubectl get service $a -n database -o yaml  > "$a-service.yaml"
+done
+for a in $(kubectl get service -n pay |grep -v NAME |awk '{print $1}')
+do
+    kubectl get service $a -n pay -o yaml  > "$a-service.yaml"
+done

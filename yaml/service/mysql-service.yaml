@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/mysql"]'
+    management.cattle.io/ui-managed: "true"
+  name: mysql
+  namespace: database
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: mysql
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-mysql
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

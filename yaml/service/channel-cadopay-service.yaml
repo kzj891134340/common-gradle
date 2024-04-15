@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-cadopay"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-03-04T08:51:37Z"
+  name: channel-cadopay
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-cadopay
+    uid: b47eeb6f-dcc2-48b2-aeb4-e3f10cd4fcba
+  resourceVersion: "12852964"
+  uid: f8c51cc7-fbe6-4cc2-af22-db6e4198a6f6
+spec:
+  clusterIP: 10.96.3.50
+  clusterIPs:
+  - 10.96.3.50
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: pppp
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-cadopay
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

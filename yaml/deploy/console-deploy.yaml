@@ -1,20 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "21"
-    field.cattle.io/publicEndpoints: '[{"addresses":["10.190.0.4"],"port":80,"protocol":"HTTP","serviceName":"pay:console","ingressName":"pay:console-api","hostname":"console.whalespay.net","path":"/api(/|$)(.*)","allNodes":true},{"addresses":["10.190.0.4"],"port":30604,"protocol":"TCP","serviceName":"pay:console-nodeport","allNodes":true}]'
-    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6xVQW/bOBP9K8EA302SJcuyLd6K9Gt7aAojcfeQKAeKHNvcUKSWpJyohv/7gpJl2d1msYfezNF4+N6becMD0Fr8gcYKrYAArWs72ScQwItQHAh8xFrqtkLlIIAKHeXUUSAHoEppR53QyvojP+dFL02JRqFDGwk9MbgXp+LJHALYCJQ8YtQ5if573ZRSsP8rXmuhnAUCT4cCKOcGrUVbAHkqIImjJI+jOJoV8BwUUGvjCiDL2P822mmmZQGkgC/r9aqAoACLZi8YBKDLP5E5iy4yQl/cKzy7TZmV0zzn4SJmi3CGOQ/zNGbhLKVsMU3TJZvP4BgAM9hRXYsKraNVDQSm8TQNkyRMsnWSkSQhSfIIAWxRoemSgaRxAJKWKDuJ3kOyo3YHBGabZDMr8zSbIstzXObLbDHPpku+YWm22Czixaakydxr+KrNi9SUR41Fc1FpiFuUyJw2p4ZGY3PCmrYh08pqiZ6YohUCgSHSB2xNmY/WtPU5tkbm8ddGb31TPiLlUih8QKYVt0DmcRyAwVoKRi2QxB/6pn8R1mnTfhWVcECSOIAR2gEq6tju61mf38XKQ3aGOty2vqzRUgq1/V5z6rC/9u2hMVvPcJr9z481ffuu6J4KSUs5hI8BuLb2p/urAj6OVS2HYu9bYmTgrsdmFsZJOJ2vk5SkMZlmj++MmGqkvByg3ynQqad0sxFKOC+Ux6CVo0KhsUCeDiAq2qnk3TdbRnGUpCTP83zyuqPST0k7OdUkSRRHMQT9X1aNlCstBWuBwAf5SlsLvxg1b+L+ovO9K21cZ+she+dc7VNPHgcC69sVHJ/9iFndGIa2h+7QVEJ1Ct6htR4Fdd5WE477ycXXUOot/DJ/QPxJdPD2WjYV3ulGnVBW/udQVertBam9luGPHyL7C47PHhxX9lzuVjbWofkkjPU71PjuGvdPfSzbIW8kmm99TY4b2kgXnuM+B1ljhGtvtXL45nrq/arDD4x5gOM/4edP14WvRfhsKMMVGqH52dd+ffUq9ALstD3xP0A9qEsd7cSYjI09+eZiv1zp0xuUuqYb6rPv7i8XiEcgTk56OoCk1q0NVVYMFnl/Afvc3qtj3rXj0tlj95h1bfcG729+QHdTDPMZZvNFxnm5LJcF3OyovbENY2jtppGyvRl2IfKo6ym13Qv3DV/HYh/OG2XkC2vTXEi0OpURagvH4H2ePf7c489SEuf/zvM6b+Q5vuUdoUooUTXVzakDQgrXXrG56xOGxvwHPmOKd4Eu/fwh//zTk2iQ8vb++r24ODQdKX6RcDz+HQAA///BeFZ5pwgAAA
-    objectset.rio.cattle.io/id: fb5b299d-70c7-4e9d-930c-43ac72338c64
-  creationTimestamp: "2024-01-29T19:43:12Z"
-  generation: 27
   labels:
     objectset.rio.cattle.io/hash: 4f1f4b9352ec99e898576528dfc357f707fba166
     workload.user.cattle.io/workloadselector: apps.deployment-pay-console
   name: console
   namespace: pay
-  resourceVersion: "24786466"
-  uid: 24d1facb-4908-4bf2-b43a-cb47400b92f6
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -37,7 +28,7 @@ spec:
     spec:
       affinity: {}
       containers:
-      - image: 10.148.0.13:9999/whalespay/console:1.0.0
+      - image: 172.18.89.0:8083/whales/console:1.0.0
         imagePullPolicy: Always
         name: console
         ports:

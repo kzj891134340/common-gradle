@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-globalpay"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:27:34Z"
+  name: channel-globalpay
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-globalpay
+    uid: 1bd207d3-3f32-4fba-9699-70d8a3f5c819
+  resourceVersion: "37929"
+  uid: 165a6522-9132-4d20-a632-3d1dd81d7768
+spec:
+  clusterIP: 10.96.2.218
+  clusterIPs:
+  - 10.96.2.218
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: globalpay
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-globalpay
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

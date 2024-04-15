@@ -1,16 +1,68 @@
-apiVersion: v1
-data:
-  application.yaml: |-
-    core:
-      rootDir: /application/files
-kind: ConfigMap
+kind: Deployment
+apiVersion: apps/v1
 metadata:
-  annotations:
-    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/3yRzY7UMBCEX2VU5yQzzu9OX0HcuA1z4OfQsduzhsSObGul1SjvjpIVCxKwx+4q12dV38GLu0pMLngQnhQKGM4M2pRlcpqzC7565nkCQYco9NUfDjGE/N5FOhz/cB2tmyRhLfDDeQPCu+Ctu33kBQVmyfya7H3I+5O0jWH8LjonyVV0odKc8ySVC0e3ZSh5sPbUtuXQDbpsz7YvRzZ9aceh785m7NSgNqSOside3Cwp87yAUJ/qplSqVN1FddQ0pNrPKDDxKNOb5EdOjyAM7ViLqZVoc+5O/SBdo0S1amhsbx/YKMu9Httm48/s+Sbmg5PJJNCXfzVrd/HyvAgIL87r7/1VbV+y9KulCnRfC1j6+xD3dX1FRhD4Jj6jQFgk7j4QPi2Gs6BAdrP8r4z1WwHPu77dFi9TWlhvK05JciqTxCeJWNefAQAA///WTa1ILgIAAA
-    objectset.rio.cattle.io/id: 1e8ff044-757c-49f6-bad6-fb7659db5171
-  creationTimestamp: "2024-01-29T19:49:51Z"
-  labels:
-    objectset.rio.cattle.io/hash: 74b2ed21ecd95067e531e14173f6f8ad1fa6cb43
   name: core
-  namespace: assets-server
-  resourceVersion: "7356"
+  namespace: pay
+  labels:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-pay-core
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-pay-core
+    spec:
+      volumes:
+        - name: vol-votbv
+          configMap:
+            name: logback
+            defaultMode: 420
+        - name: vol-kopks
+          hostPath:
+            path: /data/logs/core
+            type: ''
+        - name: vol-b3vhk
+          configMap:
+            name: core
+            defaultMode: 420
+        - name: volume-iwa0fi
+          persistentVolumeClaim:
+            claimName: thunes-pv
+      containers:
+        - name: core
+          image: '172.18.89.0:8083/whales/core:1.0.2-k8s'
+          ports:
+            - name: core
+              containerPort: 80
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: vol-votbv
+              mountPath: /application/loggin
+            - name: vol-kopks
+              mountPath: /logs
+            - name: vol-b3vhk
+              mountPath: /application/core
+            - name: volume-iwa0fi
+              mountPath: /data/attachment
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      affinity: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

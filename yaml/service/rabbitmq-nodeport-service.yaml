@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/rabbitmq"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T23:17:16Z"
+  name: rabbitmq-nodeport
+  namespace: database
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: rabbitmq
+    uid: 931163a4-487d-499b-8862-c09fa7bd905b
+  resourceVersion: "67605"
+  uid: ab990c99-8387-42b9-8faf-23012b2c8188
+spec:
+  clusterIP: 10.96.1.255
+  clusterIPs:
+  - 10.96.1.255
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http5672
+    nodePort: 30173
+    port: 5672
+    protocol: TCP
+    targetPort: 5672
+  - name: http15672
+    nodePort: 31943
+    port: 15672
+    protocol: TCP
+    targetPort: 15672
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-rabbitmq
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

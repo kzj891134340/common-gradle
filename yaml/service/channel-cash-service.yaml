@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-cash"]'
+    management.cattle.io/ui-managed: "true"
+  creationTimestamp: "2024-01-29T21:03:48Z"
+  name: channel-cash
+  namespace: pay
+  ownerReferences:
+  - apiVersion: apps/v1
+    controller: true
+    kind: Deployment
+    name: channel-cash
+    uid: 12eca128-e4a9-4617-8f17-57eb4147e1df
+  resourceVersion: "31183"
+  uid: 95edabbb-376b-4daf-b859-688b83d54f3d
+spec:
+  clusterIP: 10.96.0.121
+  clusterIPs:
+  - 10.96.0.121
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-cash
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

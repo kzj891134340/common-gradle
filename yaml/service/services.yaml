@@ -1,0 +1,228 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/risk"]'
+    management.cattle.io/ui-managed: "true"
+  name: risk
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-risk
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/settle"]'
+    management.cattle.io/ui-managed: "true"
+  name: settle
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-settle
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/account"]'
+    management.cattle.io/ui-managed: "true"
+  name: account
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: port
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-account
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/core"]'
+    management.cattle.io/ui-managed: "true"
+  name: core
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: core
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-core
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/redis"]'
+    management.cattle.io/ui-managed: "true"
+  name: redis
+  namespace: database
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-redis
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/rabbitmq"]'
+    management.cattle.io/ui-managed: "true"
+  name: rabbitmq
+  namespace: database
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http5672
+      port: 5672
+      protocol: TCP
+      targetPort: 5672
+    - name: http15672
+      port: 15672
+      protocol: TCP
+      targetPort: 15672
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-rabbitmq
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["database/mysql"]'
+    management.cattle.io/ui-managed: "true"
+  name: mysql
+  namespace: database
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-database-mysql
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-ppro"]'
+    management.cattle.io/ui-managed: "true"
+  name: channel-ppro
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: ppro
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-ppro
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["pay/channel-thunes"]'
+    management.cattle.io/ui-managed: "true"
+  name: channel-thunes
+  namespace: pay
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: thunes
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-pay-channel-thunes
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
