@@ -13,7 +13,6 @@ metadata:
     workload.user.cattle.io/workloadselector: apps.deployment-pay-assets-server
   name: assets-server
   namespace: pay
-  resourceVersion: "16973524"
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -38,11 +37,7 @@ spec:
       containers:
       - env:
         - name: server_console
-          value: console.whalespay.net:/www/console
-        - name: server_merchant
-          value: merchant.whalespay.net:/www/merchant
-        - name: server_merchant_console
-          value: console-merchant.whalespay.net:/www/console_merchant
+          value: ksdev.urtrade.io:/www/console
         image: kylinchan/nginx-forward:1.0.1
         imagePullPolicy: Always
         name: assets-server

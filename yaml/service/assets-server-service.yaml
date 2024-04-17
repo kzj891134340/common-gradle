@@ -6,11 +6,6 @@ metadata:
     management.cattle.io/ui-managed: "true"
   name: assets-server
   namespace: pay
-  ownerReferences:
-  - apiVersion: apps/v1
-    controller: true
-    kind: Deployment
-    name: assets-server
 spec:
   internalTrafficPolicy: Cluster
   ipFamilies:
